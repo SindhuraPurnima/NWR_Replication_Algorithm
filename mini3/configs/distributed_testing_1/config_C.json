@@ -3,39 +3,11 @@
     "address": "0.0.0.0",
     "port": 50053,
     "is_entry_point": false,
-    "network": [
-      {
-        "id": "A",
-        "address": "127.0.0.1",
-        "port": 50051,
-        "connections": ["B"]
-      },
-      {
-        "id": "B",
-        "address": "127.0.0.1",
-        "port": 50052,
-        "connections": ["C", "D"]
-      },
-      {
-        "id": "C",
-        "address": "10.0.0.2",
-        "port": 50053,
-        "connections": ["E"]
-      },
-      {
-        "id": "D",
-        "address": "10.0.0.2",
-        "port": 50054,
-        "connections": ["E"]
-      },
-      {
-        "id": "E",
-        "address": "10.0.0.2",
-        "port": 50055,
-        "connections": []
-      }
-    ],
-    "replication": {
+    "neighbors": {                
+        "B": "127.0.0.1:50052",  
+        "E": "10.0.0.2:50055"    
+    },
+     "replication": {
         "min_replicas": 2,
         "max_replicas": 3,
         "stealing_threshold": 0.7,
