@@ -96,6 +96,17 @@ service ReplicationService {
     rpc UpdateMetrics (MetricsUpdate) returns (MetricsResponse) {}
     rpc SyncReplicas (SyncRequest) returns (SyncResponse) {}
 }
+// Add this message type for StealResponse
+message Message {
+    string content = 1;
+    string id = 2;
+    int64 timestamp = 3;
+}
+// Add this message type for UpdateMetrics RPC
+message MetricsResponse {
+    bool success = 1;
+    string message = 2;
+}
 
 // New message types for Mini 3
 message StealRequest {
@@ -124,6 +135,10 @@ message SyncResponse {
 }
 
 message Empty {}
+
+
+
+
 
 
 
