@@ -1,0 +1,2 @@
+/usr/bin/ar qc libproto.a CMakeFiles/proto.dir/proto/mini2.pb.cc.o CMakeFiles/proto.dir/proto/mini2.grpc.pb.cc.o
+/usr/bin/ranlib libproto.a

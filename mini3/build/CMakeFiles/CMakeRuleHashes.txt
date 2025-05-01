@@ -1,0 +1,2 @@
+# Hashes of file build rules.
+9ae56f6d760a3054e88c7c26a2e2ba8c proto/mini2.pb.cc

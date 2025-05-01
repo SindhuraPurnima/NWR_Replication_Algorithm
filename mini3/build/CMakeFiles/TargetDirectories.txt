@@ -1,0 +1,5 @@
+/Users/sindhurapurnima/Desktop/mini3/mini3/build/CMakeFiles/proto.dir
+/Users/sindhurapurnima/Desktop/mini3/mini3/build/CMakeFiles/server.dir
+/Users/sindhurapurnima/Desktop/mini3/mini3/build/CMakeFiles/client.dir
+/Users/sindhurapurnima/Desktop/mini3/mini3/build/CMakeFiles/edit_cache.dir
+/Users/sindhurapurnima/Desktop/mini3/mini3/build/CMakeFiles/rebuild_cache.dir
