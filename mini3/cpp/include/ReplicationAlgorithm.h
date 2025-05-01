@@ -5,7 +5,7 @@
 #include <chrono>
 #include <memory>
 #include <grpcpp/grpcpp.h>
-#include "proto/replication.grpc.pb.h"
+#include "proto/mini2.grpc.pb.h"
 
 class ReplicationAlgorithm {
 public:

@@ -14,6 +14,9 @@
 #include "parser/CSV.h"
 #include "SpatialAnalysis.h"  // Add this include for query functionality
 #include "ReplicationManager.h"
+#include "MetricsCollector.h"  // Include MetricsCollector header which has ServerMetrics
+#include <algorithm>
+#include <cmath>
 
 using json = nlohmann::json;
 using grpc::Server;
@@ -33,6 +36,7 @@ using mini2::StealRequest;
 using mini2::StealResponse;
 using mini2::MetricsUpdate;
 using mini2::MetricsResponse;
+using namespace mini2;
 
 // Structure to hold shared memory information
 struct SharedMemorySegment {
@@ -65,6 +69,56 @@ static int64_t g_expected_total_dataset_size = 0;  // Expected final dataset siz
 // Add a function to set the expected dataset size (could be called via command line)
 void setExpectedDatasetSize(int64_t size) {
     g_expected_total_dataset_size = size;
+}
+
+// Add missing helper functions
+double getCpuLoad() {
+    // Simple implementation
+    return 0.5; // 50% load for testing
+}
+
+double getMemoryUsage() {
+    // Simple implementation
+    return 0.4; // 40% usage for testing
+}
+
+double measureAverageLatency() {
+    // Simple implementation
+    return 50.0; // 50ms for testing
+}
+
+double normalizeQueueSize(int size) {
+    const int MAX_QUEUE_SIZE = 1000;
+    return static_cast<double>(size) / MAX_QUEUE_SIZE;
+}
+
+double normalizeLatency(double latency) {
+    const double MAX_LATENCY = 1000.0;
+    return std::min(1.0, latency / MAX_LATENCY);
+}
+
+ReplicationManager::ServerMetrics getServerMetrics(const std::string& serverId) {
+    ReplicationManager::ServerMetrics metrics;
+    metrics.cpu_load = getCpuLoad();
+    metrics.queue_size = 0;
+    metrics.memory_usage = getMemoryUsage();
+    metrics.network_latency = measureAverageLatency();
+    metrics.last_update = std::chrono::system_clock::now();
+    return metrics;
+}
+
+// Add this before the GenericServer class definition
+ReplicationManager::Config loadConfig(const std::string& config_path) {
+    ReplicationManager::Config config;
+    // Load from config_path
+    // For now, return default values
+    config.min_replicas = 2;
+    config.max_replicas = 3;
+    config.stealing_threshold = 0.7;
+    config.weights.queue_size = 0.4;
+    config.weights.cpu_load = 0.3;
+    config.weights.network_latency = 0.3;
+    return config;
 }
 
 // Generic Server implementation
@@ -105,13 +159,10 @@ private:
     
     ReplicationManager replication_manager_;
     std::vector<Message> message_queue_;
+    ReplicationManager::Config config_;  // Add this line
     
-    struct ServerMetrics {
-        double cpu_load;
-        int queue_size;
-        double memory_usage;
-        double network_latency;
-    } current_metrics_;
+    // Replace the ServerMetrics struct with ReplicationManager's version
+    ReplicationManager::ServerMetrics current_metrics_;
     
     // Initialize shared memory for a specific connection
     bool initSharedMemory(const std::string& connection_id, int key, size_t size) {
@@ -254,8 +305,8 @@ private:
         return true;
     }
     
-    // Add ranking calculation
-    double calculateRank(const ServerMetrics& metrics) {
+    // Update the calculateRank function to use ReplicationManager's Config
+    double calculateRank(const ReplicationManager::ServerMetrics& metrics) {
         return (
             config_.weights.queue_size * normalizeQueueSize(metrics.queue_size) +
             config_.weights.cpu_load * metrics.cpu_load +
@@ -269,7 +320,7 @@ private:
         
         // Calculate ranks for all servers
         for (const auto& [serverId, node] : network_nodes) {
-            ServerMetrics metrics = getServerMetrics(serverId);
+            auto metrics = getServerMetrics(serverId);
             serverRanks[serverId] = calculateRank(metrics);
         }
         
@@ -478,8 +529,9 @@ private:
 public:
     GenericServer(const std::string& config_path) 
         : is_entry_point(false),
-          spatialAnalysis(10, 2)  // 10 injuries or 2 deaths to mark area high-risk
-    {
+          spatialAnalysis(10, 2),  // 10 injuries or 2 deaths to mark area high-risk
+          config_(loadConfig(config_path)),
+          replication_manager_(config_path, config_) {  // Initialize with both parameters
         // Use the global value if it's been set via command line
         if (g_expected_total_dataset_size > 0) {
             total_dataset_size = g_expected_total_dataset_size;
@@ -687,12 +739,12 @@ public:
     
     // Handle forwarded data from other servers
     Status ForwardData(ServerContext* context, const CollisionBatch& batch, Empty* response) {
-        for (const auto& data : batch.data()) {
+        for (const auto& data : batch.collisions()) {
             // Instead of round-robin, use ranking
             std::string targetServer = chooseTargetServer(data);
             
             if (targetServer != server_id) {
-                forwardToServer(targetServer, data);
+                forwardDataToServer(targetServer, batch);
             } else {
                 processLocally(data);
             }
@@ -736,27 +788,28 @@ public:
         return Status::OK;
     }
     
-    grpc::Status StealWork(grpc::ServerContext* context,
-                          const StealRequest* request,
-                          StealResponse* response) override {
+    Status StealWork(ServerContext* context,
+                    const StealRequest* request,
+                    StealResponse* response) {
         auto stolen_messages = replication_manager_.handleStealRequest(
             request->requested_items());
         *response->mutable_stolen_messages() = {
             stolen_messages.begin(), 
             stolen_messages.end()
         };
-        return grpc::Status::OK;
+        return Status::OK;
     }
 
-    grpc::Status UpdateMetrics(grpc::ServerContext* context,
-                             const MetricsUpdate* request,
-                             MetricsResponse* response) override {
+    Status UpdateMetrics(ServerContext* context,
+                        const MetricsUpdate* request,
+                        MetricsResponse* response) {
         // Update metrics
         current_metrics_.cpu_load = getCpuLoad();
         current_metrics_.queue_size = message_queue_.size();
         current_metrics_.memory_usage = getMemoryUsage();
         current_metrics_.network_latency = measureAverageLatency();
-        return grpc::Status::OK;
+        current_metrics_.last_update = std::chrono::system_clock::now();
+        return Status::OK;
     }
 
 private:
@@ -835,37 +888,38 @@ private:
         current_metrics_.memory_usage = getMemoryUsage();
         current_metrics_.network_latency = measureAverageLatency();
     }
+
+    void processLocally(const CollisionData& data) {
+        // Implement local processing
+        // For now, just print
+        std::cout << "Processing collision data locally" << std::endl;
+    }
 };
 
 class ReplicationServer final : public ReplicationService::Service {
 public:
     explicit ReplicationServer(const std::string& config_path) 
-        : replication_mgr_(loadConfig(config_path)) {
-        // Initialize server
+        : server_id_(config_path) {
     }
 
-    Status RouteMessage(ServerContext* context, const Message* request,
-                       Response* response) override {
-        bool handled = replication_mgr_.handleMessage(*request);
-        response->set_success(handled);
-        return Status::OK;
+    grpc::Status StealWork(grpc::ServerContext* context,
+                          const mini2::StealRequest* request,
+                          mini2::StealResponse* response) override {
+        // Your implementation
+        return grpc::Status::OK;
     }
 
-    Status StealWork(ServerContext* context, const StealRequest* request,
-                    StealResponse* response) override {
-        auto stolen = replication_mgr_.handleStealRequest(request->requested_items());
-        *response->mutable_stolen_messages() = {stolen.begin(), stolen.end()};
-        return Status::OK;
-    }
-
-    Status UpdateMetrics(ServerContext* context, const MetricsUpdate* request,
-                        MetricsResponse* response) override {
-        replication_mgr_.updateMetrics();
-        return Status::OK;
+    grpc::Status UpdateMetrics(grpc::ServerContext* context,
+                              const mini2::MetricsUpdate* request,
+                              mini2::MetricsResponse* response) override {
+        // Your implementation
+        return grpc::Status::OK;
     }
 
 private:
-    ReplicationManager replication_mgr_;
+    std::string server_id_;
+    ReplicationManager::Config config_;
+    std::map<std::string, std::unique_ptr<mini2::ReplicationService::Stub>> neighbor_stubs_;
 };
 
 int main(int argc, char** argv) {

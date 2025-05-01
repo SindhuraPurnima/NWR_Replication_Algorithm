@@ -1,69 +1,120 @@
 #include "ReplicationManager.h"
+#include <algorithm>
+#include <cmath>
+#include <chrono>
 
-ReplicationManager::ReplicationManager() {
-    // Initialize weights from config
-    weights_.queue_size = 0.4;
-    weights_.cpu_load = 0.3;
-    weights_.network_latency = 0.3;
-    stealingThreshold_ = 0.7;
-}
+ReplicationManager::ReplicationManager(const std::string& server_id, const Config& config)
+    : server_id_(server_id), config_(config) {}
 
-double ReplicationManager::calculateScore(const ServerMetrics& metrics) {
-    // Implement ranking equation: Rank = c0x0 + c1x1 + c2x2
-    return weights_.queue_size * metrics.queue_size +
-           weights_.cpu_load * metrics.cpu_load +
-           weights_.network_latency * metrics.network_latency;
-}
-
-bool ReplicationManager::shouldStealWork(const std::string& serverId) {
-    // Implement work stealing logic
-    return metrics_[serverId].queue_size > stealingThreshold_;
+double ReplicationManager::calculateServerRank(const ServerMetrics& metrics) {
+    // Lower rank is better (represents load)
+    return (
+        config_.weights.queue_size * normalizeQueueSize(metrics.queue_size) +
+        config_.weights.cpu_load * metrics.cpu_load +
+        config_.weights.memory_usage * metrics.memory_usage +
+        config_.weights.network_latency * normalizeLatency(metrics.network_latency)
+    );
 }
 
 bool ReplicationManager::handleMessage(const Message& msg) {
-    // 1. Calculate scores for all servers
-    std::map<std::string, double> scores;
-    for (const auto& [server_id, stub] : server_stubs_) {
-        MetricsUpdate metrics;
-        auto status = stub->UpdateMetrics(&metrics);
-        if (status.ok()) {
-            scores[server_id] = calculateScore(metrics);
-        }
-    }
-
-    // 2. Find best server for message
-    std::string best_server = findBestServer(scores);
+    // 1. Get list of best servers for replication
+    auto replica_targets = selectReplicaTargets(config_.min_replicas);
     
-    // 3. Route message or handle locally
-    if (best_server == server_id_) {
+    // 2. If we're one of the best targets, store locally
+    bool store_locally = std::find(replica_targets.begin(), 
+                                 replica_targets.end(), 
+                                 server_id_) != replica_targets.end();
+    
+    if (store_locally) {
         message_queue_.push_back(msg);
-        return true;
-    } else {
-        return forwardMessage(best_server, msg);
     }
+    
+    return store_locally;
 }
 
-void ReplicationManager::balanceLoad() {
-    // Check if we need to steal work
-    if (current_metrics_.queue_size < config_.stealing_threshold) {
-        // Find overloaded neighbors
-        for (const auto& [server_id, stub] : server_stubs_) {
-            MetricsUpdate metrics;
-            auto status = stub->UpdateMetrics(&metrics);
-            if (status.ok() && metrics.queue_size > config_.stealing_threshold) {
-                // Steal work
-                StealRequest request;
-                request.set_source_server(server_id_);
-                request.set_requested_items(5); // Can be configured
-                StealResponse response;
-                auto steal_status = stub->StealWork(&request, &response);
-                if (steal_status.ok()) {
-                    // Handle stolen messages
-                    for (const auto& msg : response.stolen_messages()) {
-                        message_queue_.push_back(msg);
-                    }
-                }
-            }
-        }
+std::vector<std::string> ReplicationManager::selectReplicaTargets(int count) {
+    std::vector<std::pair<std::string, double>> server_ranks;
+    
+    // Calculate ranks for all servers including self
+    for (const auto& [server_id, metrics] : server_metrics_) {
+        server_ranks.emplace_back(server_id, calculateServerRank(metrics));
     }
+    
+    // Add self if not in metrics
+    if (server_metrics_.find(server_id_) == server_metrics_.end()) {
+        ServerMetrics self_metrics = getCurrentMetrics(); // Implement this to get local metrics
+        server_ranks.emplace_back(server_id_, calculateServerRank(self_metrics));
+    }
+    
+    // Sort by rank (lower is better)
+    std::sort(server_ranks.begin(), server_ranks.end(),
+              [](const auto& a, const auto& b) { return a.second < b.second; });
+    
+    // Select top N servers
+    std::vector<std::string> targets;
+    for (int i = 0; i < std::min(count, (int)server_ranks.size()); i++) {
+        targets.push_back(server_ranks[i].first);
+    }
+    
+    return targets;
+}
+
+bool ReplicationManager::shouldStealWork() {
+    auto self_metrics = getCurrentMetrics();
+    double self_rank = calculateServerRank(self_metrics);
+    
+    // Find average rank of all servers
+    double total_rank = 0;
+    int count = 0;
+    for (const auto& [_, metrics] : server_metrics_) {
+        total_rank += calculateServerRank(metrics);
+        count++;
+    }
+    
+    if (count == 0) return false;
+    
+    double avg_rank = total_rank / count;
+    // If we're significantly less loaded than average, try to steal
+    return self_rank < (avg_rank * config_.stealing_threshold);
+}
+
+std::vector<Message> ReplicationManager::handleStealRequest(int requested_count) {
+    if (message_queue_.empty()) return {};
+    
+    // Calculate how many messages we can give away while maintaining min_replicas
+    int available = std::max(0, (int)message_queue_.size() - config_.min_replicas);
+    int to_steal = std::min(requested_count, available);
+    
+    std::vector<Message> stolen_messages;
+    stolen_messages.reserve(to_steal);
+    
+    // Take messages from the front of the queue
+    for (int i = 0; i < to_steal; i++) {
+        stolen_messages.push_back(message_queue_.front());
+        message_queue_.erase(message_queue_.begin());
+    }
+    
+    return stolen_messages;
+}
+
+// Helper functions
+double ReplicationManager::normalizeQueueSize(int size) {
+    const int MAX_QUEUE_SIZE = 1000; // Can be configured
+    return static_cast<double>(size) / MAX_QUEUE_SIZE;
+}
+
+double ReplicationManager::normalizeLatency(double latency) {
+    const double MAX_LATENCY = 1000.0; // 1 second
+    return std::min(1.0, latency / MAX_LATENCY);
+}
+
+// Add getCurrentMetrics implementation
+ReplicationManager::ServerMetrics ReplicationManager::getCurrentMetrics() {
+    ServerMetrics metrics;
+    metrics.cpu_load = 0.5;  // Example values
+    metrics.queue_size = message_queue_.size();
+    metrics.memory_usage = 0.4;
+    metrics.network_latency = 50.0;
+    metrics.last_update = std::chrono::system_clock::now();
+    return metrics;
 }

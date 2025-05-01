@@ -1,150 +1,215 @@
 cmake_minimum_required(VERSION 3.10)
 
-# Force gcc/g++ before project declaration
-# set(CMAKE_C_COMPILER "/usr/local/bin/gcc-14" CACHE STRING "C compiler" FORCE)
-#set(CMAKE_CXX_COMPILER "/usr/local/bin/g++-14" CACHE STRING "C++ compiler" FORCE)
-
-# Force CMake to use Homebrew's Clang before declaring the project
-# set(CMAKE_C_COMPILER "/usr/local/opt/llvm/bin/clang" CACHE STRING "C compiler" FORCE)
-# set(CMAKE_CXX_COMPILER "/usr/local/opt/llvm/bin/clang++" CACHE STRING "C++ compiler" FORCE)
-
-# Set LLVM Clang-specific flags
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -nostdinc++ -I/usr/local/opt/llvm/include/c++/v1")
-# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib")
-
-
-project(Mini2)
+project(mini3)
 
 # Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add this line to help find abseil
-set(ABSL_PROPAGATE_CXX_STD ON)
-
-# Add after project(Mini2)
-set(ABSL_USE_EXTERNAL_GOOGLETEST OFF)
-set(BUILD_TESTING OFF)
-
-# Add this to ensure proper linking
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-
-# Add these lines
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--no-as-needed")
+# Set architecture
+if(APPLE)
+    set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "Build architectures for OSX" FORCE)
+    set(CMAKE_SYSTEM_PROCESSOR "arm64")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -arch arm64")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -arch arm64")
+endif()
 
 # Find required packages
 find_package(Threads REQUIRED)
-find_package(absl CONFIG REQUIRED)
-set(protobuf_MODULE_COMPATIBLE TRUE)
-find_package(Protobuf CONFIG REQUIRED)
-find_package(gRPC CONFIG REQUIRED)
+
+# Set Homebrew paths
+set(HOMEBREW_PREFIX "/opt/homebrew")
+set(HOMEBREW_INCLUDE_DIR "${HOMEBREW_PREFIX}/include")
+set(HOMEBREW_LIB_DIR "${HOMEBREW_PREFIX}/lib")
+
+# Add include directories
+include_directories(
+    ${HOMEBREW_INCLUDE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/cpp/include
+)
 
 # Find gRPC executables
-find_program(GRPC_CPP_PLUGIN grpc_cpp_plugin REQUIRED)
-find_program(PROTOC protoc REQUIRED)
+find_program(GRPC_CPP_PLUGIN_EXECUTABLE grpc_cpp_plugin)
 
-# Generate protobuf and gRPC code
-get_filename_component(mini2_proto "proto/mini2.proto" ABSOLUTE)
-get_filename_component(mini2_proto_path "${mini2_proto}" PATH)
+# Proto files
+set(PROTO_FILES
+    ${CMAKE_CURRENT_SOURCE_DIR}/proto/mini2.proto
+)
 
-# Generate gRPC files 
-set(mini2_proto_srcs "${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/proto/mini2.pb.cc")
-set(mini2_proto_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/proto/mini2.pb.h")
-set(mini2_grpc_srcs "${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/proto/mini2.grpc.pb.cc")
-set(mini2_grpc_hdrs "${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/proto/mini2.grpc.pb.h")
+# Generated files paths
+set(PROTO_GEN_DIR ${CMAKE_CURRENT_BINARY_DIR}/proto)
+set(PROTO_GEN_SRCS ${PROTO_GEN_DIR}/mini2.pb.cc)
+set(PROTO_GEN_HDRS ${PROTO_GEN_DIR}/mini2.pb.h)
+set(PROTO_GRPC_GEN_SRCS ${PROTO_GEN_DIR}/mini2.grpc.pb.cc)
+set(PROTO_GRPC_GEN_HDRS ${PROTO_GEN_DIR}/mini2.grpc.pb.h)
 
-# Add protobuf and gRPC targets
+# Create proto directory if it doesn't exist
+file(MAKE_DIRECTORY ${PROTO_GEN_DIR})
+
+# Generate protobuf files
 add_custom_command(
-    OUTPUT 
-        "${mini2_proto_srcs}"
-        "${mini2_proto_hdrs}"
-        "${mini2_grpc_srcs}"
-        "${mini2_grpc_hdrs}"
-    COMMAND ${PROTOC}
-    ARGS --grpc_out "${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/proto"
-         --cpp_out "${CMAKE_CURRENT_SOURCE_DIR}/cpp/include/proto"
-         -I "${CMAKE_CURRENT_SOURCE_DIR}/proto"
-         --plugin=protoc-gen-grpc="${GRPC_CPP_PLUGIN}"
-         "${CMAKE_CURRENT_SOURCE_DIR}/proto/mini2.proto"
-    DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/proto/mini2.proto"
+    OUTPUT ${PROTO_GEN_SRCS} ${PROTO_GEN_HDRS} ${PROTO_GRPC_GEN_SRCS} ${PROTO_GRPC_GEN_HDRS}
+    COMMAND protoc
+    ARGS --grpc_out=${PROTO_GEN_DIR}
+         --cpp_out=${PROTO_GEN_DIR}
+         --plugin=protoc-gen-grpc=${GRPC_CPP_PLUGIN_EXECUTABLE}
+         -I ${CMAKE_CURRENT_SOURCE_DIR}/proto
+         ${PROTO_FILES}
+    DEPENDS ${PROTO_FILES}
 )
 
-# Add a custom target for the generated files
-add_custom_target(generate_proto_files
-    DEPENDS
-        "${mini2_proto_srcs}"
-        "${mini2_proto_hdrs}"
-        "${mini2_grpc_srcs}"
-        "${mini2_grpc_hdrs}"
+# Create library for generated files
+add_library(proto STATIC
+    ${PROTO_GEN_SRCS}
+    ${PROTO_GRPC_GEN_SRCS}
 )
 
-# Server source files
-set(SERVER_SRC
+# Server executable
+add_executable(server
     cpp/src/server.cpp
-    cpp/src/parser/CSV.cpp
+    cpp/src/ReplicationManager.cpp
     cpp/src/SpatialAnalysis.cpp
-    ${mini2_proto_srcs}
-    ${mini2_grpc_srcs}
+    cpp/src/ReplicationAlgorithm.cpp
+    cpp/src/MetricsCollector.cpp
 )
 
-add_executable(server ${SERVER_SRC})
-add_dependencies(server generate_proto_files)
+# Client executable
+add_executable(client
+    cpp/src/client.cpp
+)
 
-# Link libraries
-target_link_libraries(server PRIVATE
-    gRPC::grpc++
-    gRPC::grpc++_reflection
-    protobuf::libprotobuf
-    absl::flags
-    absl::flags_parse
-    absl::flags_reflection
-    absl::base
-    absl::log
-    absl::log_initialize
-    absl::log_entry
-    absl::log_globals
-    absl::log_severity
-    absl::check
-    absl::log_internal_check_op
-    absl::log_internal_conditions
-    absl::log_internal_format
-    absl::log_internal_globals
-    absl::log_internal_log_sink_set
-    absl::log_internal_message
-    absl::log_internal_nullguard
-    absl::log_internal_proto
-    absl::log_sink
-    absl::log_sink_registry
-    absl::cord
-    absl::cordz_info
-    absl::cord_internal
-    absl::strings
-    absl::strings_internal
-    absl::symbolize
-    absl::stacktrace
-    absl::synchronization
-    absl::time
-    absl::time_zone
-    absl::status
-    absl::statusor
+# Link libraries with full paths
+target_link_libraries(server
+    proto
+    ${HOMEBREW_LIB_DIR}/libgrpc++.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc_unsecure.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc_plugin_support.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpcpp_channelz.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc++_reflection.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgpr.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libprotobuf.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_base.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_throw_delegate.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_raw_logging_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_spinlock_wait.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_synchronization.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_time.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strings.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strings_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_severity.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cord.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cord_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_functions.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_info.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_handle.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_sample_token.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_status.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_statusor.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_str_format_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strerror.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_string_view.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_symbolize.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_malloc_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_stacktrace.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_debugging_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_demangle_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_graphcycles_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_kernel_timeout_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_time_zone.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_civil_time.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_check_op.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_message.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_nullguard.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_format.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_globals.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_proto.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_conditions.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_log_sink_set.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_sink.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_entry.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_initialize.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_globals.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_flags.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_hash.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_city.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_low_level_hash.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_raw_hash_set.2407.0.0.dylib
     Threads::Threads
 )
 
-# Make sure include_directories includes the cpp/include directory
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/cpp/include
-    ${Protobuf_INCLUDE_DIRS}
-    ${gRPC_INCLUDE_DIRS}
-    ${ABSL_INCLUDE_DIRS}
+target_link_libraries(client
+    proto
+    ${HOMEBREW_LIB_DIR}/libgrpc++.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc_unsecure.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc_plugin_support.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpcpp_channelz.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc++_reflection.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgpr.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libprotobuf.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_base.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_throw_delegate.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_raw_logging_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_spinlock_wait.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_synchronization.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_time.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strings.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strings_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_severity.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cord.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cord_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_functions.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_info.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_handle.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_sample_token.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_status.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_statusor.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_str_format_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strerror.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_string_view.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_symbolize.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_malloc_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_stacktrace.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_debugging_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_demangle_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_graphcycles_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_kernel_timeout_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_time_zone.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_civil_time.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_check_op.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_message.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_nullguard.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_format.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_globals.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_proto.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_conditions.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_log_sink_set.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_sink.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_entry.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_initialize.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_globals.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_flags.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_hash.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_city.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_low_level_hash.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_raw_hash_set.2407.0.0.dylib
+    Threads::Threads
 )
 
-# Add to your existing CMakeLists.txt
-add_library(replication_manager
-    src/ReplicationManager.cpp
+# Set include directories for targets
+target_include_directories(server PRIVATE
+    ${PROTO_GEN_DIR}
+    ${HOMEBREW_INCLUDE_DIR}
 )
 
-target_link_libraries(server
-    replication_manager
-    ${GRPC_LIBRARIES}
+target_include_directories(client PRIVATE
+    ${PROTO_GEN_DIR}
+    ${HOMEBREW_INCLUDE_DIR}
+)
+
+target_include_directories(proto PRIVATE
+    ${PROTO_GEN_DIR}
+    ${HOMEBREW_INCLUDE_DIR}
 )
