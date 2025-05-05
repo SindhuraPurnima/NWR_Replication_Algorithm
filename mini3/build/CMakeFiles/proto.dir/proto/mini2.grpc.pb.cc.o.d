@@ -1,6 +1,6 @@
 CMakeFiles/proto.dir/proto/mini2.grpc.pb.cc.o: \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/build/proto/mini2.grpc.pb.cc \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/build/proto/mini2.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.grpc.pb.cc \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.pb.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/limits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__assert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
@@ -1170,7 +1170,7 @@ CMakeFiles/proto.dir/proto/mini2.grpc.pb.cc.o: \
   /opt/homebrew/include/google/protobuf/map.h \
   /opt/homebrew/include/google/protobuf/map_type_handler.h \
   /opt/homebrew/include/google/protobuf/reflection.h \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/build/proto/mini2.grpc.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.grpc.pb.h \
   /opt/homebrew/include/grpcpp/generic/async_generic_service.h \
   /opt/homebrew/include/grpc/support/port_platform.h \
   /opt/homebrew/include/grpcpp/generic/callback_generic_service.h \

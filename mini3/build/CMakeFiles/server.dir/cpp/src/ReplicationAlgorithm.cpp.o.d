@@ -891,6 +891,14 @@ CMakeFiles/server.dir/cpp/src/ReplicationAlgorithm.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_day.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/year_month_weekday.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/literals.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/thread \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/formatter.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/thread.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
   /opt/homebrew/include/grpcpp/grpcpp.h \
   /opt/homebrew/include/grpc/grpc.h \
   /opt/homebrew/include/grpc/byte_buffer.h \
@@ -930,9 +938,6 @@ CMakeFiles/server.dir/cpp/src/ReplicationAlgorithm.cpp.o: \
   /opt/homebrew/include/grpcpp/support/slice.h \
   /opt/homebrew/include/grpcpp/support/string_ref.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/istream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ostream \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset \
   /opt/homebrew/include/absl/log/absl_check.h \
   /opt/homebrew/include/absl/log/internal/check_impl.h \
   /opt/homebrew/include/absl/base/optimization.h \
@@ -941,7 +946,6 @@ CMakeFiles/server.dir/cpp/src/ReplicationAlgorithm.cpp.o: \
   /opt/homebrew/include/absl/base/options.h \
   /opt/homebrew/include/absl/base/policy_checks.h \
   /opt/homebrew/include/absl/log/internal/check_op.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/sstream \
   /opt/homebrew/include/absl/base/attributes.h \
   /opt/homebrew/include/absl/log/internal/nullguard.h \
   /opt/homebrew/include/absl/log/internal/nullstream.h \
@@ -1151,8 +1155,8 @@ CMakeFiles/server.dir/cpp/src/ReplicationAlgorithm.cpp.o: \
   /opt/homebrew/include/grpcpp/security/authorization_policy_provider.h \
   /opt/homebrew/include/grpcpp/server_posix.h \
   /opt/homebrew/include/grpcpp/version_info.h \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/proto/mini2.grpc.pb.h \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/proto/mini2.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.grpc.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.pb.h \
   /opt/homebrew/include/google/protobuf/runtime_version.h \
   /opt/homebrew/include/google/protobuf/io/coded_stream.h \
   /opt/homebrew/include/google/protobuf/endian.h \

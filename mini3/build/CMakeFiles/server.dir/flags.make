@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/opt/homebrew/include -I/Users/sindhurapurnima/Desktop/mini3/mini3 -I/Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include -I/Users/sindhurapurnima/Desktop/mini3/mini3/build/proto
+CXX_INCLUDES = -I/opt/homebrew/include -I/Users/sindhurapurnima/Desktop/mini3/mini3 -I/Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include -I/Users/sindhurapurnima/Desktop/mini3/mini3/proto
 
 CXX_FLAGSarm64 =  -arch arm64 -std=gnu++17 -arch arm64
 

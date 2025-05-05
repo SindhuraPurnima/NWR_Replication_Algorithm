@@ -1,2 +1,2 @@
 # Hashes of file build rules.
-9ae56f6d760a3054e88c7c26a2e2ba8c proto/mini2.pb.cc
+2833f0259af7b041b3140aaea8fbbe5d /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.pb.cc

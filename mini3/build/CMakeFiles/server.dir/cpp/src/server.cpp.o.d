@@ -1236,8 +1236,8 @@ CMakeFiles/server.dir/cpp/src/server.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/formatter.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/this_thread.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/thread.h \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/proto/mini2.grpc.pb.h \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/proto/mini2.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.grpc.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.pb.h \
   /opt/homebrew/include/google/protobuf/runtime_version.h \
   /opt/homebrew/include/google/protobuf/io/coded_stream.h \
   /opt/homebrew/include/google/protobuf/endian.h \
@@ -1381,5 +1381,6 @@ CMakeFiles/server.dir/cpp/src/server.cpp.o: \
   /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/parser/CSV.h \
   /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/SpatialAnalysis.h \
   /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/./parser/CSV.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/MetricsCollector.h \
   /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/ReplicationManager.h \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/cpp/include/MetricsCollector.h
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/queue

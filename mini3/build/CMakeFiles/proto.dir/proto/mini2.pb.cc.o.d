@@ -1,6 +1,6 @@
 CMakeFiles/proto.dir/proto/mini2.pb.cc.o: \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/build/proto/mini2.pb.cc \
-  /Users/sindhurapurnima/Desktop/mini3/mini3/build/proto/mini2.pb.h \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.pb.cc \
+  /Users/sindhurapurnima/Desktop/mini3/mini3/proto/mini2.pb.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/limits \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__assert \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
