@@ -41,7 +41,7 @@ public:
     std::optional<ServerInfo> getServerMetrics(const std::string& server_id) const;
     std::vector<ServerInfo> getAllServerMetrics() const;
 
-    ServerMetrics collectMetrics();
+    ServerMetrics collectMetrics(int queue_size, int max_queue_size);
     double measureNetworkLatency(const std::string& target_server);
     void recordWorkSteal(const std::string& source_server, const std::string& target_server);
     void recordRecordProcessed();
@@ -54,6 +54,10 @@ public:
     int getTotalRecordsProcessed() const { return total_records_processed_; }
     int getWorkStealCount(const std::string& server_id) const { return work_steal_counts_.at(server_id); }
     int getRecordsForwardedCount(const std::string& server_id) const { return records_forwarded_counts_.at(server_id); }
+
+    // New methods
+    void setSimulatedNetworkLatency(double latency);
+    void setSimulatedHopDistance(int hop_distance);
 
 private:
     struct PerformanceMetrics {
@@ -75,4 +79,9 @@ private:
     std::chrono::system_clock::time_point last_collection_;
     std::mutex metrics_mutex_;
     std::vector<ServerInfo> server_metrics_;
+
+    // New member variables
+    double simulated_network_latency_{50.0};
+    double max_acceptable_latency_{100.0};
+    int simulated_hop_distance_{0};
 };

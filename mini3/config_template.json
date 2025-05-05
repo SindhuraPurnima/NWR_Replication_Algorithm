@@ -1,11 +1,11 @@
 {
-    "server_id": "server4",
+    "server_id": "serverX",
     "address": "localhost",
-    "port": 50054,
+    "port": 50050,
     "is_entry_point": false,
     "work_stealing": {
         "enabled": true,
-        "stealing_threshold": 0.4,
+        "stealing_threshold": 0.7,
         "weights": {
             "queue_size": 0.3,
             "cpu_load": 0.2,
@@ -22,6 +22,7 @@
             "server1": 1,
             "server2": 1,
             "server3": 1,
+            "server4": 1,
             "server5": 1
         }
     },
@@ -31,10 +32,10 @@
         "max_queue_size": 1000,
         "dynamic_update": true,
         "initial_values": {
-            "cpu_utilization": 0.30,
-            "memory_usage": 0.25,
+            "cpu_utilization": 0.50,
+            "memory_usage": 0.50,
             "message_queue_length": 200,
-            "network_latency": 45.0
+            "network_latency": 50.0
         }
     },
     "servers": [

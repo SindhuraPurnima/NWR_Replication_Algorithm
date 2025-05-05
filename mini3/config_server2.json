@@ -5,11 +5,36 @@
     "is_entry_point": false,
     "work_stealing": {
         "enabled": true,
-        "stealing_threshold": 0.7,
+        "stealing_threshold": 0.4,
         "weights": {
-            "queue_size": 0.4,
-            "cpu_load": 0.3,
-            "network_latency": 0.3
+            "queue_size": 0.3,
+            "cpu_load": 0.2,
+            "memory_usage": 0.2,
+            "network_latency": 0.2,
+            "distance": 0.1
+        }
+    },
+    "network_simulation": {
+        "base_latency": 50.0,
+        "max_acceptable_latency": 100.0,
+        "latency_variation": 20.0,
+        "topology": {
+            "server1": 1,
+            "server3": 1,
+            "server4": 1,
+            "server5": 1
+        }
+    },
+    "metrics": {
+        "collection_interval_ms": 1000,
+        "max_history_size": 100,
+        "max_queue_size": 1000,
+        "dynamic_update": true,
+        "initial_values": {
+            "cpu_utilization": 0.30,
+            "memory_usage": 0.25,
+            "message_queue_length": 200,
+            "network_latency": 45.0
         }
     },
     "servers": [

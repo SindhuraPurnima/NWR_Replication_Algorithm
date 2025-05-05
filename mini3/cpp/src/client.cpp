@@ -116,25 +116,52 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // Collect server addresses
+    // We'll only use the first server to demonstrate work stealing
     std::vector<std::string> server_addresses;
-    for (int i = 1; i < argc; ++i) {
-        server_addresses.push_back(argv[i]);
-    }
+    server_addresses.push_back(argv[1]);  // Only use the first server
+    
+    std::cout << "Sending all data to primary server: " << argv[1] << std::endl;
+    std::cout << "The server will redistribute work based on load balancing" << std::endl;
+    std::cout << "Using increased data volume (1000 records) and sending delay to facilitate work stealing" << std::endl;
 
     // Create client
     Client client(server_addresses);
 
-    // Example usage
-    CollisionData collision;
-    collision.set_collision_id("test_collision");
+    // Send multiple collision data packets
+    std::cout << "Sending collision data to primary server..." << std::endl;
     
-    // Create a batch with the collision
-    CollisionBatch batch;
-    *batch.add_collisions() = collision;
-
-    client.SendCollisionBatch(batch);
-
+    // Create different boroughs for testing
+    std::vector<std::string> boroughs = {"Manhattan", "Brooklyn", "Queens", "Bronx", "Staten Island"};
+    
+    // Send 1000 collision data points instead of 100
+    const int TOTAL_RECORDS = 1000;
+    const int DELAY_MS = 100;
+    
+    for (int i = 0; i < TOTAL_RECORDS; i++) {
+        CollisionData collision;
+        collision.set_collision_id("collision_" + std::to_string(i));
+        collision.set_borough(boroughs[i % boroughs.size()]);
+        collision.set_number_of_persons_injured(i % 5);
+        collision.set_number_of_persons_killed(i % 2);
+        
+        // Create a batch with this collision
+        CollisionBatch batch;
+        *batch.add_collisions() = collision;
+        
+        // Send to primary server
+        client.SendCollisionBatch(batch);
+        
+        // Add delay between sends to give servers time to redistribute
+        std::this_thread::sleep_for(std::chrono::milliseconds(DELAY_MS));
+        
+        // Show progress more frequently
+        if (i % 50 == 0 || i == TOTAL_RECORDS - 1) {
+            std::cout << "Sent " << i + 1 << " of " << TOTAL_RECORDS << " collision records (" 
+                      << (i + 1) * 100 / TOTAL_RECORDS << "%)" << std::endl;
+        }
+    }
+    
+    std::cout << "Finished sending all collision data." << std::endl;
     return 0;
 }
 

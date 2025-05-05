@@ -185,10 +185,22 @@ void ReplicationManager::fairnessMetricsLoop() {
 
 void ReplicationManager::updateMetrics() {
     std::lock_guard<std::mutex> lock(metrics_mutex_);
-    current_metrics_.set_cpu_utilization(getCpuLoad());
-    current_metrics_.set_memory_usage(getMemoryUsage());
-    current_metrics_.set_avg_network_latency(measureAverageLatency());
-    current_metrics_.set_message_queue_length(getQueueSize());
+    
+    // Get the real-time queue size
+    size_t current_queue_size = getQueueSize();
+    
+    // Use real queue size when collecting metrics
+    current_metrics_ = metrics_collector_.collectMetrics(
+        current_queue_size,
+        config_.max_queue_size
+    );
+    
+    // Update hop distance for other servers based on network topology
+    for (const auto& [server_id, distance] : server_distances_) {
+        metrics_collector_.setSimulatedHopDistance(distance);
+    }
+    
+    // Add message age information
     current_metrics_.set_avg_message_age(getAverageMessageAge());
     current_metrics_.set_max_message_age(getMaxMessageAge());
 }
@@ -515,8 +527,38 @@ double ReplicationManager::getMemoryUsage() const {
 }
 
 double ReplicationManager::measureAverageLatency() const {
-    // Simple implementation
-    return 50.0; // 50ms for testing
+    // Simplified implementation - in a real system you would measure actual latency
+    // to other servers, perhaps using ping or measuring gRPC call round-trip times
+    double total_latency = 0.0;
+    int count = 0;
+    
+    std::lock_guard<std::mutex> lock(servers_mutex_);
+    
+    // CRITICAL FIX: Check if servers array is valid and non-empty before iterating
+    if (config_.servers.empty()) {
+        std::cout << "Warning: No servers configured for latency measurement. Using default latency." << std::endl;
+        return 50.0; // Default latency value
+    }
+    
+    for (const auto& server : config_.servers) {
+        // CRITICAL FIX: Add safety checks before accessing server methods
+        try {
+            if (!server.server_id().empty() && server.server_id() != config_.server_id) {
+                // Simulate different latencies for different servers
+                double latency = 20.0 + (rand() % 80); // 20-100ms range
+                total_latency += latency;
+                count++;
+                
+                // Update the latency for this server
+                const_cast<ReplicationManager*>(this)->updateNetworkLatency(server.server_id(), latency);
+            }
+        } catch (const std::exception& e) {
+            std::cerr << "Error accessing server data: " << e.what() << std::endl;
+            // Continue to next server
+        }
+    }
+    
+    return count > 0 ? total_latency / count : 50.0; // Return default if no servers
 }
 
 ReplicationManager::FairnessMetrics ReplicationManager::getFairnessMetrics() const {
@@ -537,12 +579,33 @@ void ReplicationManager::handleStolenWork(const std::vector<CollisionData>& stol
 }
 
 void ReplicationManager::updateServerDistances() {
+    std::lock_guard<std::mutex> lock(topology_mutex_);
+    
+    // Update distances (simplified implementation)
     for (const auto& server : config_.servers) {
-        server_distances_[server.server_id()] = calculateDistance(server.server_id());
+        if (server.server_id() == config_.server_id) {
+            server_distances_[server.server_id()] = 0; // Self
+        }
+        else if (server_distances_.find(server.server_id()) == server_distances_.end()) {
+            // New server, add at distance 1
+            server_distances_[server.server_id()] = 1; // Direct connection
+        }
+    }
+    
+    // Update the metrics collector with appropriate hop distances
+    for (const auto& [server_id, distance] : server_distances_) {
+        if (server_id == config_.server_id) {
+            metrics_collector_.setSimulatedHopDistance(0); // Self
+        }
     }
 }
 
 double ReplicationManager::normalizeDistance(double distance) const {
     const double MAX_DISTANCE = 10.0;  // Maximum network distance
     return std::min(1.0, distance / MAX_DISTANCE);
+}
+
+void ReplicationManager::updateNetworkLatency(const std::string& server_id, double latency) {
+    // Update the simulated latency in the metrics collector
+    metrics_collector_.setSimulatedNetworkLatency(latency);
 }

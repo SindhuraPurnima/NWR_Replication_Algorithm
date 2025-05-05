@@ -1,0 +1,26 @@
+Sending all data to primary server: localhost:50051
+The server will redistribute work based on load balancing
+Using increased data volume (1000 records) and sending delay to facilitate work stealing
+Sending collision data to primary server...
+Sent 1 of 1000 collision records (0%)
+Sent 51 of 1000 collision records (5%)
+Sent 101 of 1000 collision records (10%)
+Sent 151 of 1000 collision records (15%)
+Sent 201 of 1000 collision records (20%)
+Sent 251 of 1000 collision records (25%)
+Sent 301 of 1000 collision records (30%)
+Sent 351 of 1000 collision records (35%)
+Sent 401 of 1000 collision records (40%)
+Sent 451 of 1000 collision records (45%)
+Sent 501 of 1000 collision records (50%)
+Sent 551 of 1000 collision records (55%)
+Sent 601 of 1000 collision records (60%)
+Sent 651 of 1000 collision records (65%)
+Sent 701 of 1000 collision records (70%)
+Sent 751 of 1000 collision records (75%)
+Sent 801 of 1000 collision records (80%)
+Sent 851 of 1000 collision records (85%)
+Sent 901 of 1000 collision records (90%)
+Sent 951 of 1000 collision records (95%)
+Sent 1000 of 1000 collision records (100%)
+Finished sending all collision data.

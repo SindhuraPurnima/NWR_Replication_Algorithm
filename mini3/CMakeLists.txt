@@ -86,6 +86,11 @@ add_executable(client
     cpp/src/client.cpp
 )
 
+# Metrics Monitor executable
+add_executable(metrics_monitor
+    cpp/src/metrics_monitor.cpp
+)
+
 # Link libraries with full paths
 target_link_libraries(server
     proto
@@ -205,6 +210,65 @@ target_link_libraries(client
     Threads::Threads
 )
 
+target_link_libraries(metrics_monitor
+    proto
+    ${HOMEBREW_LIB_DIR}/libgrpc++.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc_unsecure.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc_plugin_support.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpcpp_channelz.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgrpc++_reflection.1.71.0.dylib
+    ${HOMEBREW_LIB_DIR}/libgpr.46.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libprotobuf.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_base.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_throw_delegate.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_raw_logging_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_spinlock_wait.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_synchronization.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_time.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strings.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strings_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_severity.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cord.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cord_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_functions.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_info.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_handle.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_cordz_sample_token.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_status.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_statusor.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_str_format_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_strerror.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_string_view.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_symbolize.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_malloc_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_stacktrace.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_debugging_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_demangle_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_graphcycles_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_kernel_timeout_internal.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_time_zone.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_civil_time.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_check_op.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_message.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_nullguard.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_format.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_globals.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_proto.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_conditions.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_internal_log_sink_set.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_sink.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_entry.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_initialize.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_globals.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_log_flags.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_hash.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_city.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_low_level_hash.2407.0.0.dylib
+    ${HOMEBREW_LIB_DIR}/libabsl_raw_hash_set.2407.0.0.dylib
+    Threads::Threads
+)
+
 # Set include directories for targets
 target_include_directories(server PRIVATE
     ${PROTO_GEN_DIR}
@@ -216,7 +280,22 @@ target_include_directories(client PRIVATE
     ${HOMEBREW_INCLUDE_DIR}
 )
 
+target_include_directories(metrics_monitor PRIVATE
+    ${PROTO_GEN_DIR}
+    ${HOMEBREW_INCLUDE_DIR}
+)
+
 target_include_directories(proto PRIVATE
     ${PROTO_GEN_DIR}
     ${HOMEBREW_INCLUDE_DIR}
 )
+
+# Add test executables
+#add_executable(test_server
+#    cpp/src/test_server.cpp
+#)
+
+#add_executable(test_client
+ #   cpp/src/test_client.cpp
+#)
+

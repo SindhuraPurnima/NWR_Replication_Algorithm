@@ -48,6 +48,13 @@ public:
         int max_steal_attempts = 3;
         int max_steal_hops = 2;
         int steal_cooldown_ms = 1000;
+        
+        // Network simulation parameters
+        double base_latency = 50.0;
+        double max_acceptable_latency = 100.0;
+        double latency_variation = 20.0;
+        std::map<std::string, int> topology;  // Server ID -> hop distance
+        
         std::vector<ServerInfo> servers;
     };
 
@@ -113,6 +120,7 @@ public:
     double calculateServerRank(const ServerInfo& server) const;
     bool canStealFromServer(const ServerInfo& server) const;
     void updateNetworkTopology(const ServerInfo& server);
+    void updateNetworkLatency(const std::string& server_id, double latency);
 
 private:
     Config config_;

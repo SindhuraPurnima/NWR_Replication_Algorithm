@@ -1,0 +1,4434 @@
+Server Load Monitoring Tool
+==========================
+
+Monitoring 5 servers:
+  - localhost:50051
+  - localhost:50052
+  - localhost:50053
+  - localhost:50054
+  - localhost:50055
+
+
+======== SERVER STATUS (16:16:21) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 80.00%
+  Queue: 900/1000
+  Latency: 65.00ms
+  Rank: 0.780
+
+[ONLINE] Server: server2
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 200/1000
+  Latency: 45.00ms
+  Rank: 0.310
+
+[ONLINE] Server: server3
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 200/1000
+  Latency: 45.00ms
+  Rank: 0.310
+
+[ONLINE] Server: server4
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 200/1000
+  Latency: 45.00ms
+  Rank: 0.310
+
+[ONLINE] Server: server5
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 200/1000
+  Latency: 45.00ms
+  Rank: 0.310
+
+
+======== SERVER STATUS (16:16:26) ========
+
+[ONLINE] Server: server1
+  CPU: 67.95%
+  Memory: 43.93%
+  Queue: 785/1000
+  Latency: 61.40ms
+  Rank: 0.632
+
+[ONLINE] Server: server2
+  CPU: 72.27%
+  Memory: 43.81%
+  Queue: 761/1000
+  Latency: 60.44ms
+  Rank: 0.631
+
+[ONLINE] Server: server3
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 0/1000
+  Latency: 45.00ms
+  Rank: 0.250
+
+[ONLINE] Server: server4
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 0/1000
+  Latency: 45.00ms
+  Rank: 0.250
+
+[ONLINE] Server: server5
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 0/1000
+  Latency: 45.00ms
+  Rank: 0.250
+
+
+======== SERVER STATUS (16:16:31) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[ONLINE] Server: server2
+  CPU: 69.97%
+  Memory: 43.86%
+  Queue: 771/1000
+  Latency: 60.84ms
+  Rank: 0.631
+
+[ONLINE] Server: server3
+  CPU: 66.25%
+  Memory: 43.38%
+  Queue: 675/1000
+  Latency: 57.00ms
+  Rank: 0.586
+
+[ONLINE] Server: server4
+  CPU: 13.07%
+  Memory: 40.01%
+  Queue: 1/1000
+  Latency: 30.04ms
+  Rank: 0.217
+
+[ONLINE] Server: server5
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 0/1000
+  Latency: 45.00ms
+  Rank: 0.250
+
+
+======== SERVER STATUS (16:16:36) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[ONLINE] Server: server2
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[ONLINE] Server: server3
+  CPU: 72.97%
+  Memory: 43.86%
+  Queue: 771/1000
+  Latency: 60.84ms
+  Rank: 0.637
+
+[ONLINE] Server: server4
+  CPU: 17.07%
+  Memory: 40.01%
+  Queue: 1/1000
+  Latency: 30.04ms
+  Rank: 0.225
+
+[ONLINE] Server: server5
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 0/1000
+  Latency: 45.00ms
+  Rank: 0.250
+
+
+======== SERVER STATUS (16:16:41) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[ONLINE] Server: server2
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[ONLINE] Server: server3
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[ONLINE] Server: server4
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[ONLINE] Server: server5
+  CPU: 30.00%
+  Memory: 25.00%
+  Queue: 0/1000
+  Latency: 45.00ms
+  Rank: 0.250
+
+
+======== SERVER STATUS (16:16:46) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[ONLINE] Server: server2
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[ONLINE] Server: server3
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[ONLINE] Server: server4
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[ONLINE] Server: server5
+  CPU: 75.21%
+  Memory: 44.52%
+  Queue: 903/1000
+  Latency: 66.12ms
+  Rank: 0.693
+
+
+======== SERVER STATUS (16:16:51) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:16:56) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:01) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:06) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:11) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:16) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:21) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:26) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:31) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:36) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:41) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:46) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:51) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:17:56) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:01) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:06) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:11) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:16) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:21) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:26) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:31) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:36) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:41) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:46) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:51) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:18:56) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:01) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:06) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:11) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:16) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:21) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:26) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:31) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:36) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:41) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:46) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:51) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:19:57) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:02) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:07) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:12) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:17) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:22) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:27) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:32) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:37) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:42) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:47) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:52) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:20:57) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:02) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:07) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:12) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:17) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:22) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:27) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:32) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:37) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:42) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:47) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:52) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:21:57) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:02) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:07) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:12) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:17) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:22) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:27) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:32) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:37) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:42) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:47) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:52) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:22:57) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:02) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:07) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:12) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:17) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:22) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:27) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:32) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:37) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:42) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:47) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:52) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:23:57) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:02) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:08) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:13) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:18) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:23) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:28) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:33) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:38) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:43) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:48) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:53) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:24:58) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:03) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:08) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:13) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:18) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:23) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:28) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:33) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:38) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:43) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:48) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:53) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:25:58) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:03) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:08) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:13) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:18) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:23) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:28) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:33) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:38) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:43) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:48) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:53) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:26:58) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:03) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:08) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:13) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:18) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:23) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:29) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:34) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:39) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:44) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:49) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:54) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:27:59) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:04) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:09) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:14) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:19) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:24) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:29) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:34) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:39) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:44) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:49) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:54) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:28:59) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:04) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:09) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:14) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:19) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:24) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:29) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:34) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:39) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:44) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:49) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:54) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:29:59) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:04) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:09) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:14) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:19) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:24) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:29) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:34) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:39) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:44) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:49) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:54) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:30:59) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:04) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:09) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:15) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:20) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:25) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:30) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:35) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:40) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:45) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:50) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:31:55) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:00) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:05) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:10) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:15) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:20) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:25) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:30) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:35) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:40) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:45) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:50) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:32:55) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:00) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:05) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:10) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:15) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:20) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:25) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:30) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:35) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:40) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:45) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:50) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:33:55) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:00) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:05) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:10) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:15) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:20) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:25) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:30) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:35) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:40) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:45) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:50) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:34:55) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:00) ========
+
+[ONLINE] Server: server1
+  CPU: 85.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.750
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:05) ========
+
+[ONLINE] Server: server1
+  CPU: 84.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.748
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:10) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:15) ========
+
+[ONLINE] Server: server1
+  CPU: 83.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.746
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:20) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:25) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:30) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:36) ========
+
+[ONLINE] Server: server1
+  CPU: 81.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.742
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:41) ========
+
+[ONLINE] Server: server1
+  CPU: 80.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.740
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:46) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:51) ========
+
+[ONLINE] Server: server1
+  CPU: 86.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.752
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:35:56) ========
+
+[ONLINE] Server: server1
+  CPU: 87.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.754
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:36:01) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:36:06) ========
+
+[ONLINE] Server: server1
+  CPU: 82.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.744
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:36:11) ========
+
+[ONLINE] Server: server1
+  CPU: 89.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.758
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATUS (16:36:16) ========
+
+[ONLINE] Server: server1
+  CPU: 88.00%
+  Memory: 45.00%
+  Queue: 1000/1000
+  Latency: 70.00ms
+  Rank: 0.756
+
+[OFFLINE] Server server2 at localhost:50052 is not responding
+
+[OFFLINE] Server server3 at localhost:50053 is not responding
+
+[OFFLINE] Server server4 at localhost:50054 is not responding
+
+[OFFLINE] Server server5 at localhost:50055 is not responding
+
+
+======== SERVER STATU

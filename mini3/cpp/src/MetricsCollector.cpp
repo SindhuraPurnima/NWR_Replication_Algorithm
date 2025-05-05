@@ -20,7 +20,10 @@
 MetricsCollector::MetricsCollector(const std::string& server_id)
     : server_id_(server_id),
       total_records_processed_(0),
-      last_collection_(std::chrono::system_clock::now()) {
+      last_collection_(std::chrono::system_clock::now()),
+      simulated_network_latency_(50.0),  // Default 50ms latency
+      max_acceptable_latency_(100.0),    // Default 100ms max acceptable
+      simulated_hop_distance_(0) {        // Default 0 hops (self)
     // Initialize work steal and records forwarded counts
     work_steal_counts_[server_id] = 0;
     records_forwarded_counts_[server_id] = 0;
@@ -49,24 +52,36 @@ double MetricsCollector::getCpuLoad() {
     return 0.0;
 }
 
-ServerMetrics MetricsCollector::collectMetrics() {
+ServerMetrics MetricsCollector::collectMetrics(int queue_size, int max_queue_size) {
     ServerMetrics metrics;
     
-    // Get CPU usage
+    // Get CPU usage (real-time)
     metrics.set_cpu_utilization(getCpuLoad());
     
-    // Get memory usage
+    // Get memory usage (real-time)
     metrics.set_memory_usage(getMemoryUsage());
     
-    // Get network latency (simplified for now)
-    metrics.set_avg_network_latency(0.0); // TODO: Implement actual network latency measurement
+    // Use simulated network latency (configurable)
+    metrics.set_avg_network_latency(simulated_network_latency_);
     
-    // Get message queue metrics
-    metrics.set_message_queue_length(0); // TODO: Get actual queue length
-    metrics.set_max_queue_length(1000); // Configurable
-    metrics.set_avg_message_age(0.0); // TODO: Calculate average message age
-    metrics.set_max_message_age(3600.0); // 1 hour in seconds
-    metrics.set_max_acceptable_latency(100.0); // 100ms
+    // Use real queue length (passed as parameter)
+    metrics.set_message_queue_length(queue_size);
+    metrics.set_max_queue_length(max_queue_size);
+    
+    // Set hop distance (configurable)
+    metrics.set_hop_distance(simulated_hop_distance_);
+    
+    // Set other metrics
+    metrics.set_max_acceptable_latency(max_acceptable_latency_);
+    
+    // Store metrics in history for later analysis
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    metrics_history_.push_back(metrics);
+    
+    // Trim history if too large
+    if (metrics_history_.size() > 100) {
+        metrics_history_.erase(metrics_history_.begin());
+    }
     
     return metrics;
 }
@@ -95,9 +110,20 @@ double MetricsCollector::getMemoryUsage() {
     return 0.0;
 }
 
+void MetricsCollector::setSimulatedNetworkLatency(double latency) {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    simulated_network_latency_ = latency;
+}
+
+void MetricsCollector::setSimulatedHopDistance(int hop_distance) {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    simulated_hop_distance_ = hop_distance;
+}
+
 double MetricsCollector::measureNetworkLatency(const std::string& target_server) {
-    // Simple implementation for testing
-    return 50.0; // 50ms for testing
+    // This is now for testing or manual benchmarking
+    // In a real system, you'd ping the server or measure gRPC latency
+    return simulated_network_latency_;
 }
 
 void MetricsCollector::recordWorkSteal(const std::string& source_server, const std::string& target_server) {
@@ -259,4 +285,69 @@ double MetricsCollector::calculateConsistencyScore() {
     
     // Score closer to 1.0 means better consistency
     return 1.0 / (1.0 + variance);
+}
+
+// Add the implementation of getAllServerMetrics
+std::vector<ServerInfo> MetricsCollector::getAllServerMetrics() const {
+    // Return a copy of the stored server metrics
+    return server_metrics_; // Remove the lock_guard for const methods
+}
+
+// Add the implementation of getServerMetrics
+std::optional<ServerInfo> MetricsCollector::getServerMetrics(const std::string& server_id) const {
+    // Remove the lock_guard for const methods
+    for (const auto& server : server_metrics_) {
+        if (server.server_id() == server_id) {
+            return server;
+        }
+    }
+    return std::nullopt;
+}
+
+// Add the implementation of updateServerMetrics
+void MetricsCollector::updateServerMetrics(const ServerInfo& server) {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    
+    // Find existing server metrics
+    auto it = std::find_if(server_metrics_.begin(), server_metrics_.end(),
+                         [&server](const ServerInfo& s) {
+                             return s.server_id() == server.server_id();
+                         });
+    
+    if (it != server_metrics_.end()) {
+        // Update existing entry
+        *it = server;
+    } else {
+        // Add new entry
+        server_metrics_.push_back(server);
+    }
+}
+
+// Add the implementation of removeServerMetrics
+void MetricsCollector::removeServerMetrics(const std::string& server_id) {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    
+    // Clean up any metrics for this server
+    auto it = std::find_if(server_metrics_.begin(), server_metrics_.end(), 
+                         [&server_id](const ServerInfo& info) {
+                             return info.server_id() == server_id;
+                         });
+    if (it != server_metrics_.end()) {
+        server_metrics_.erase(it);
+    }
+    
+    // Clean up any work steal counts related to this server
+    std::vector<std::string> keys_to_remove;
+    for (const auto& [key, _] : work_steal_counts_) {
+        if (key.find(server_id) != std::string::npos) {
+            keys_to_remove.push_back(key);
+        }
+    }
+    
+    for (const auto& key : keys_to_remove) {
+        work_steal_counts_.erase(key);
+    }
+    
+    // Clean up any record forwarding counts
+    records_forwarded_counts_.erase(server_id);
 }
