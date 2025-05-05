@@ -27,6 +27,7 @@ include_directories(
     ${HOMEBREW_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/proto
 )
 
 # Find gRPC executables
@@ -38,7 +39,7 @@ set(PROTO_FILES
 )
 
 # Generated files paths
-set(PROTO_GEN_DIR ${CMAKE_CURRENT_BINARY_DIR}/proto)
+set(PROTO_GEN_DIR ${CMAKE_CURRENT_SOURCE_DIR}/proto)
 set(PROTO_GEN_SRCS ${PROTO_GEN_DIR}/mini2.pb.cc)
 set(PROTO_GEN_HDRS ${PROTO_GEN_DIR}/mini2.pb.h)
 set(PROTO_GRPC_GEN_SRCS ${PROTO_GEN_DIR}/mini2.grpc.pb.cc)
@@ -63,6 +64,12 @@ add_custom_command(
 add_library(proto STATIC
     ${PROTO_GEN_SRCS}
     ${PROTO_GRPC_GEN_SRCS}
+)
+
+# Set include directories for proto library
+target_include_directories(proto PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/proto
 )
 
 # Server executable

@@ -2,6 +2,33 @@
 #include <mach/mach.h>
 #include <mach/mach_host.h>
 #include <thread>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <chrono>
+#include <sys/resource.h>
+#include <mutex>
+#include <mach/vm_statistics.h>
+#include <mach/mach_types.h>
+#include <mach/mach_init.h>
+#include <sys/sysctl.h>
+#include <unistd.h>
+
+MetricsCollector::MetricsCollector(const std::string& server_id)
+    : server_id_(server_id),
+      total_records_processed_(0),
+      last_collection_(std::chrono::system_clock::now()) {
+    // Initialize work steal and records forwarded counts
+    work_steal_counts_[server_id] = 0;
+    records_forwarded_counts_[server_id] = 0;
+}
+
+MetricsCollector::~MetricsCollector() {
+    // Clean up any resources if needed
+}
 
 double MetricsCollector::getCpuLoad() {
     host_cpu_load_info_data_t cpuinfo;
@@ -24,11 +51,23 @@ double MetricsCollector::getCpuLoad() {
 
 ServerMetrics MetricsCollector::collectMetrics() {
     ServerMetrics metrics;
-    metrics.cpu_load = getCpuLoad();
-    metrics.memory_usage = getMemoryUsage();
-    metrics.queue_size = 0;  // This should be set by the caller
-    metrics.network_latency = measureNetworkLatency("localhost");
-    metrics.last_update = std::chrono::system_clock::now();
+    
+    // Get CPU usage
+    metrics.set_cpu_utilization(getCpuLoad());
+    
+    // Get memory usage
+    metrics.set_memory_usage(getMemoryUsage());
+    
+    // Get network latency (simplified for now)
+    metrics.set_avg_network_latency(0.0); // TODO: Implement actual network latency measurement
+    
+    // Get message queue metrics
+    metrics.set_message_queue_length(0); // TODO: Get actual queue length
+    metrics.set_max_queue_length(1000); // Configurable
+    metrics.set_avg_message_age(0.0); // TODO: Calculate average message age
+    metrics.set_max_message_age(3600.0); // 1 hour in seconds
+    metrics.set_max_acceptable_latency(100.0); // 100ms
+    
     return metrics;
 }
 
@@ -59,4 +98,165 @@ double MetricsCollector::getMemoryUsage() {
 double MetricsCollector::measureNetworkLatency(const std::string& target_server) {
     // Simple implementation for testing
     return 50.0; // 50ms for testing
+}
+
+void MetricsCollector::recordWorkSteal(const std::string& source_server, const std::string& target_server) {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    work_steal_counts_[source_server + "->" + target_server]++;
+}
+
+void MetricsCollector::recordRecordProcessed() {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    total_records_processed_++;
+}
+
+void MetricsCollector::recordRecordForwarded(const std::string& target_server) {
+    std::lock_guard<std::mutex> lock(metrics_mutex_);
+    records_forwarded_counts_[target_server]++;
+}
+
+void MetricsCollector::generatePerformanceReport(const std::string& filename) {
+    std::ofstream report(filename);
+    if (!report.is_open()) {
+        std::cerr << "Failed to open report file: " << filename << std::endl;
+        return;
+    }
+
+    auto metrics = calculatePerformanceMetrics();
+    
+    report << "Performance Report for Server: " << server_id_ << "\n\n";
+    report << "Throughput: " << metrics.throughput << " records/second\n";
+    report << "Average Response Time: " << metrics.avg_response_time << " ms\n";
+    report << "Load Balance Score: " << metrics.load_balance_score << "\n";
+    report << "Consistency Score: " << metrics.consistency_score << "\n\n";
+    
+    report << "Work Stealing Events:\n";
+    for (const auto& pair : work_steal_counts_) {
+        report << "  " << pair.first << ": " << pair.second << " times\n";
+    }
+    
+    report << "\nRecords Forwarded:\n";
+    for (const auto& pair : records_forwarded_counts_) {
+        report << "  To " << pair.first << ": " << pair.second << " records\n";
+    }
+    
+    report.close();
+}
+
+MetricsCollector::PerformanceMetrics MetricsCollector::calculatePerformanceMetrics() {
+    PerformanceMetrics metrics;
+    
+    // Calculate throughput
+    if (!metrics_history_.empty()) {
+        auto time_span = std::chrono::duration_cast<std::chrono::seconds>(
+            std::chrono::system_clock::now() - last_collection_).count();
+        if (time_span > 0) {
+            metrics.throughput = static_cast<double>(total_records_processed_) / time_span;
+        }
+    }
+    
+    // Calculate load balance score
+    metrics.load_balance_score = calculateLoadBalanceScore();
+    
+    // Calculate consistency score
+    metrics.consistency_score = calculateConsistencyScore();
+    
+    return metrics;
+}
+
+void MetricsCollector::logMetrics(const ServerMetrics& metrics) {
+    std::ofstream log("metrics_log.csv", std::ios::app);
+    if (!log.is_open()) {
+        std::cerr << "Failed to open metrics log file" << std::endl;
+        return;
+    }
+    
+    auto now = std::chrono::system_clock::now();
+    auto time_t_now = std::chrono::system_clock::to_time_t(now);
+    log << std::put_time(std::localtime(&time_t_now), "%Y-%m-%d %H:%M:%S") << ","
+        << metrics.cpu_utilization() << ","
+        << metrics.memory_usage() << ","
+        << metrics.avg_network_latency() << ","
+        << metrics.message_queue_length() << ","
+        << metrics.avg_message_age() << "\n";
+    
+    log.close();
+}
+
+bool MetricsCollector::verifyDataConsistency(const std::vector<std::string>& server_ids) {
+    // Implementation would depend on your data consistency requirements
+    // This is a placeholder that assumes consistency if all servers have processed similar numbers of records
+    if (metrics_history_.empty()) return true;
+    
+    auto latest = metrics_history_.back();
+    double avg_records = static_cast<double>(total_records_processed_) / server_ids.size();
+    double variance = 0.0;
+    
+    for (const auto& metrics : metrics_history_) {
+        variance += std::pow(metrics.message_queue_length() - avg_records, 2);
+    }
+    variance /= metrics_history_.size();
+    
+    return variance < (avg_records * 0.1); // Allow 10% variance
+}
+
+void MetricsCollector::resolveConflicts(const std::vector<std::string>& server_ids) {
+    // Implementation would depend on your conflict resolution strategy
+    // This is a placeholder that logs conflicts
+    std::ofstream conflict_log("conflicts.log", std::ios::app);
+    if (!conflict_log.is_open()) {
+        std::cerr << "Failed to open conflict log file" << std::endl;
+        return;
+    }
+    
+    auto now = std::chrono::system_clock::now();
+    auto time_t_now = std::chrono::system_clock::to_time_t(now);
+    conflict_log << std::put_time(std::localtime(&time_t_now), "%Y-%m-%d %H:%M:%S")
+                << " - Conflict resolution initiated for servers: ";
+    for (const auto& id : server_ids) {
+        conflict_log << id << " ";
+    }
+    conflict_log << "\n";
+    
+    conflict_log.close();
+}
+
+double MetricsCollector::calculateLoadBalanceScore() {
+    if (metrics_history_.empty()) return 1.0;
+    
+    double total_load = 0.0;
+    for (const auto& metrics : metrics_history_) {
+        total_load += metrics.cpu_utilization() + metrics.memory_usage();
+    }
+    double avg_load = total_load / metrics_history_.size();
+    
+    double variance = 0.0;
+    for (const auto& metrics : metrics_history_) {
+        double current_load = metrics.cpu_utilization() + metrics.memory_usage();
+        variance += std::pow(current_load - avg_load, 2);
+    }
+    variance /= metrics_history_.size();
+    
+    // Score closer to 1.0 means better load balancing
+    return 1.0 / (1.0 + variance);
+}
+
+double MetricsCollector::calculateConsistencyScore() {
+    if (metrics_history_.empty()) return 1.0;
+    
+    // Calculate consistency based on record processing rates
+    double total_records = 0.0;
+    for (const auto& metrics : metrics_history_) {
+        total_records += metrics.message_queue_length();
+    }
+    double avg_records = total_records / metrics_history_.size();
+    
+    double variance = 0.0;
+    for (const auto& metrics : metrics_history_) {
+        variance += std::pow(metrics.message_queue_length() - avg_records, 2);
+    }
+    variance /= metrics_history_.size();
+    
+    // Score closer to 1.0 means better consistency
+    return 1.0 / (1.0 + variance);
 }

@@ -1,0 +1,8 @@
+{
+    "server": {
+        "address": "localhost",
+        "port": 50051
+    },
+    "batch_size": 100,
+    "batch_delay_ms": 100
+} 

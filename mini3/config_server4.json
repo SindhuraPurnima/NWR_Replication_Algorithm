@@ -1,0 +1,42 @@
+{
+    "server_id": "server4",
+    "address": "localhost",
+    "port": 50054,
+    "is_entry_point": false,
+    "work_stealing": {
+        "enabled": true,
+        "stealing_threshold": 0.7,
+        "weights": {
+            "queue_size": 0.4,
+            "cpu_load": 0.3,
+            "network_latency": 0.3
+        }
+    },
+    "servers": [
+        {
+            "id": "server1",
+            "address": "localhost",
+            "port": 50051
+        },
+        {
+            "id": "server2",
+            "address": "localhost",
+            "port": 50052
+        },
+        {
+            "id": "server3",
+            "address": "localhost",
+            "port": 50053
+        },
+        {
+            "id": "server4",
+            "address": "localhost",
+            "port": 50054
+        },
+        {
+            "id": "server5",
+            "address": "localhost",
+            "port": 50055
+        }
+    ]
+} 

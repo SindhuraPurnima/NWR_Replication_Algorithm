@@ -13,8 +13,8 @@
 #include "proto/mini2.pb.h"
 #include "parser/CSV.h"
 #include "SpatialAnalysis.h"  // Add this include for query functionality
-#include "ReplicationManager.h"
 #include "MetricsCollector.h"  // Include MetricsCollector header which has ServerMetrics
+#include "ReplicationManager.h"
 #include <algorithm>
 #include <cmath>
 
@@ -29,7 +29,6 @@ using mini2::CollisionData;
 using mini2::CollisionBatch;
 using mini2::RiskAssessment;
 using mini2::Empty;
-using mini2::EntryPointService;
 using mini2::InterServerService;
 using mini2::DatasetInfo;
 using mini2::StealRequest;
@@ -97,32 +96,50 @@ double normalizeLatency(double latency) {
     return std::min(1.0, latency / MAX_LATENCY);
 }
 
-ReplicationManager::ServerMetrics getServerMetrics(const std::string& serverId) {
-    ReplicationManager::ServerMetrics metrics;
-    metrics.cpu_load = getCpuLoad();
-    metrics.queue_size = 0;
-    metrics.memory_usage = getMemoryUsage();
-    metrics.network_latency = measureAverageLatency();
-    metrics.last_update = std::chrono::system_clock::now();
+double normalizeDistance(double distance) {
+    const double MAX_DISTANCE = 10.0;  // Maximum network distance
+    return std::min(1.0, distance / MAX_DISTANCE);
+}
+
+ServerMetrics getServerMetrics(const std::string& serverId) {
+    ServerMetrics metrics;
+    metrics.set_cpu_utilization(getCpuLoad());
+    metrics.set_message_queue_length(0);
+    metrics.set_memory_usage(getMemoryUsage());
+    metrics.set_avg_network_latency(measureAverageLatency());
+    metrics.set_max_queue_length(1000);  // Configurable
     return metrics;
 }
 
 // Add this before the GenericServer class definition
 ReplicationManager::Config loadConfig(const std::string& config_path) {
     ReplicationManager::Config config;
-    // Load from config_path
-    // For now, return default values
-    config.min_replicas = 2;
-    config.max_replicas = 3;
+    config.server_id = "server1";
+    config.address = "0.0.0.0";
+    config.port = 50051;
+    config.max_queue_size = 1000;
     config.stealing_threshold = 0.7;
-    config.weights.queue_size = 0.4;
-    config.weights.cpu_load = 0.3;
-    config.weights.network_latency = 0.3;
+    config.stealing_batch_size = 10;
+    config.metrics_interval_ms = 1000;
+    config.stealing_interval_ms = 5000;
+    config.min_replicas = 3;
+    config.max_steal_attempts = 3;
+    config.max_steal_hops = 2;
+    config.steal_cooldown_ms = 1000;
+
+    // Initialize weights
+    ReplicationManager::Weights weights;
+    weights.queue_size = 0.4;
+    weights.cpu_load = 0.3;
+    weights.memory_usage = 0.2;
+    weights.network_latency = 0.3;
+    weights.distance = 0.1;
+
     return config;
 }
 
 // Generic Server implementation
-class GenericServer : public EntryPointService::Service, public InterServerService::Service {
+class GenericServer : public InterServerService::Service {
 private:
     // Server configuration
     std::string server_id;
@@ -158,11 +175,45 @@ private:
     int64_t total_dataset_size = 0;
     
     ReplicationManager replication_manager_;
-    std::vector<Message> message_queue_;
+    std::vector<CollisionData> message_queue_;
     ReplicationManager::Config config_;  // Add this line
     
     // Replace the ServerMetrics struct with ReplicationManager's version
-    ReplicationManager::ServerMetrics current_metrics_;
+    ServerMetrics current_metrics_;
+    
+    MetricsCollector metrics_collector_;
+    std::vector<ServerMetrics> metrics_history_;
+    
+    // Replication state (N: number of replicas, W: write quorum, R: read quorum)
+    int N = 3;  // Number of replicas
+    int W = 2;  // Write quorum
+    int R = 2;  // Read quorum
+    
+    // Replication state
+    std::vector<CollisionData> local_queue;
+    std::map<std::string, double> server_ranks;  // For load balancing
+    std::map<std::string, int> hop_counts;       // For distance tracking
+    
+    // Metrics
+    double cpu_load = 0.0;
+    double network_latency = 0.0;
+    int queue_size = 0;
+    int max_queue_size = 1000;  // Configurable capacity
+    
+    // Work stealing parameters
+    int max_steal_distance = 3;  // Maximum hops for stealing
+    int min_queue_size = 100;    // Minimum queue size before stealing
+    double steal_threshold = 0.7; // CPU load threshold for stealing
+    
+    // Add weights_ as a member variable
+    ReplicationManager::Weights weights_;
+    
+    // Add this helper function to calculate distance between servers
+    double calculateDistance(const std::string& target_server_id) {
+        // Simple implementation: return 1.0 for now
+        // In a real implementation, this would calculate network distance
+        return 1.0;
+    }
     
     // Initialize shared memory for a specific connection
     bool initSharedMemory(const std::string& connection_id, int key, size_t size) {
@@ -209,6 +260,7 @@ private:
     
     // Forward data to connected servers via gRPC
     void forwardDataToServer(const std::string& server_id, const CollisionBatch& batch) {
+        metrics_collector_.recordRecordForwarded(server_id);
         if (server_stubs.find(server_id) == server_stubs.end()) {
             initServerStub(server_id);
         }
@@ -305,13 +357,15 @@ private:
         return true;
     }
     
-    // Update the calculateRank function to use ReplicationManager's Config
-    double calculateRank(const ReplicationManager::ServerMetrics& metrics) {
-        return (
-            config_.weights.queue_size * normalizeQueueSize(metrics.queue_size) +
-            config_.weights.cpu_load * metrics.cpu_load +
-            config_.weights.network_latency * normalizeLatency(metrics.network_latency)
-        );
+    // Update the calculateRank function to use weights_
+    double calculateRank(const ServerMetrics& metrics) {
+        double score = 
+            weights_.queue_size * normalizeQueueSize(metrics.message_queue_length()) +
+            weights_.cpu_load * metrics.cpu_utilization() +
+            weights_.memory_usage * metrics.memory_usage() +
+            weights_.network_latency * normalizeLatency(metrics.avg_network_latency()) +
+            weights_.distance * normalizeDistance(calculateDistance(server_id));
+        return score;
     }
 
     // Replace Mini 2's equal distribution with this:
@@ -414,124 +468,102 @@ private:
         return 0.0;
     }
 
-    // Add a method to analyze network topology
+    // Update analyzeNetworkTopology to use weights_
     void analyzeNetworkTopology() {
-        std::cout << "\n--- Network Topology Analysis for Server " << server_id << " ---\n";
+        std::cout << "\n=== Server " << server_id << " Initialization Report ===\n";
+        std::cout << "Address: " << config_.address << ":" << config_.port << "\n\n";
         
-        // Determine node types in the network
-        std::set<std::string> entry_points;
-        std::set<std::string> intermediary_nodes;
-        std::set<std::string> leaf_nodes;
+        std::cout << "--- Replication Configuration ---\n";
+        std::cout << "Min Replicas: " << config_.min_replicas << "\n";
+        std::cout << "Work Stealing Threshold: " << config_.stealing_threshold << "\n";
+        std::cout << "Load Balancing Weights:\n";
+        std::cout << "  - Queue Size: " << weights_.queue_size << "\n";
+        std::cout << "  - CPU Load: " << weights_.cpu_load << "\n";
+        std::cout << "  - Memory Usage: " << weights_.memory_usage << "\n";
+        std::cout << "  - Network Latency: " << weights_.network_latency << "\n";
+        std::cout << "  - Distance: " << weights_.distance << "\n\n";
         
-        // Count incoming connections for each node
-        std::map<std::string, int> incoming_connections;
-        
-        // Initialize counts
-        for (const auto& node_pair : network_nodes) {
-            incoming_connections[node_pair.first] = 0;
-        }
-        
-        // Count incoming connections
-        for (const auto& node_pair : network_nodes) {
-            for (const auto& conn : node_pair.second.connections) {
-                incoming_connections[conn]++;
+        std::cout << "--- Network Topology ---\n";
+        std::cout << "Connected Servers:\n";
+        for (const auto& server : config_.servers) {
+            if (server.server_id() != server_id) {
+                std::cout << "  - Server " << server.server_id()
+                         << " (" << server.address() << ":" << server.port() << ")\n";
             }
         }
-        
-        // Classify nodes
-        for (const auto& node_pair : network_nodes) {
-            const std::string& node_id = node_pair.first;
-            const auto& connections = node_pair.second.connections;
-            
-            if (node_pair.second.id == server_id && is_entry_point) {
-                entry_points.insert(node_id);
-            } else if (connections.empty()) {
-                leaf_nodes.insert(node_id);
-            } else {
-                intermediary_nodes.insert(node_id);
-            }
-        }
-        
-        // Log topology information
-        std::cout << "  Entry points: ";
-        for (const auto& node : entry_points) std::cout << node << " ";
         std::cout << "\n";
         
-        std::cout << "  Intermediary nodes: ";
-        for (const auto& node : intermediary_nodes) std::cout << node << " ";
-        std::cout << "\n";
+        std::cout << "--- Initial Metrics ---\n";
+        updateMetrics();
+        std::cout << "  CPU Load: " << current_metrics_.cpu_utilization() * 100 << "%\n";
+        std::cout << "  Memory Usage: " << current_metrics_.memory_usage() * 100 << "%\n";
+        std::cout << "  Queue Size: " << current_metrics_.message_queue_length() << "\n";
+        std::cout << "  Network Latency: " << current_metrics_.avg_network_latency() << "ms\n\n";
         
-        std::cout << "  Leaf nodes: ";
-        for (const auto& node : leaf_nodes) std::cout << node << " ";
-        std::cout << "\n";
-        
-        std::cout << "  Connection map:\n";
-        for (const auto& node_pair : network_nodes) {
-            std::cout << "    " << node_pair.first << " → ";
-            if (node_pair.second.connections.empty()) {
-                std::cout << "(endpoint)";
-            } else {
-                for (const auto& conn : node_pair.second.connections) {
-                    std::cout << conn << " ";
-                }
-            }
-            std::cout << " (incoming: " << incoming_connections[node_pair.first] << ")\n";
-        }
-        
-        std::cout << "--- End of Network Analysis ---\n\n";
+        std::cout << "=== Server Ready for Replication ===\n";
+        std::cout << "Listening on " << config_.address << ":" << config_.port << "\n\n";
     }
 
-    // Convert CollisionData (protobuf) to CSVRow for analysis
-    CSVRow convertToCSVRow(const CollisionData& data) {
-        CSVRow row;
-        row.crash_date = data.crash_date();
-        row.crash_time = data.crash_time();
-        row.borough = data.borough();
-        row.zip_code = data.zip_code().empty() ? 0 : std::stoi(data.zip_code());
-        row.latitude = data.latitude();
-        row.longitude = data.longitude();
-        row.location = data.location();
-        row.on_street_name = data.on_street_name();
-        row.cross_street_name = data.cross_street_name();
-        row.off_street_name = data.off_street_name();
-        row.persons_injured = data.number_of_persons_injured();
-        row.persons_killed = data.number_of_persons_killed();
-        row.pedestrians_injured = data.number_of_pedestrians_injured();
-        row.pedestrians_killed = data.number_of_pedestrians_killed();
-        row.cyclists_injured = data.number_of_cyclist_injured();
-        row.cyclists_killed = data.number_of_cyclist_killed();
-        row.motorists_injured = data.number_of_motorist_injured();
-        row.motorists_killed = data.number_of_motorist_killed();
+    void updateMetrics() {
+        cpu_load = getCpuLoad();
+        queue_size = local_queue.size();
+        network_latency = measureAverageLatency();
+        current_metrics_.set_cpu_utilization(cpu_load);
+        current_metrics_.set_message_queue_length(queue_size);
+        current_metrics_.set_memory_usage(getMemoryUsage());
+        current_metrics_.set_avg_network_latency(network_latency);
+        current_metrics_.set_max_queue_length(max_queue_size);
         
-        // Additional fields would be set here
-        return row;
-    }
-    
-    // Process local data using SpatialAnalysis
-    void processLocalData() {
-        if (localCollisionData.empty()) {
-            std::cout << "No local data to analyze on server " << server_id << std::endl;
-            return;
+        // Log metrics periodically
+        static auto last_log = std::chrono::system_clock::now();
+        auto now = std::chrono::system_clock::now();
+        if (std::chrono::duration_cast<std::chrono::seconds>(now - last_log).count() >= 30) {
+            std::cout << "\n--- Performance Metrics Update ---\n";
+            std::cout << "Server: " << server_id << "\n";
+            std::cout << "  CPU Load: " << current_metrics_.cpu_utilization() * 100 << "%\n";
+            std::cout << "  Memory Usage: " << current_metrics_.memory_usage() * 100 << "%\n";
+            std::cout << "  Queue Size: " << current_metrics_.message_queue_length() << "\n";
+            std::cout << "  Network Latency: " << current_metrics_.avg_network_latency() << "ms\n";
+            std::cout << "  Records Processed: " << metrics_collector_.getTotalRecordsProcessed() << "\n";
+            std::cout << "  Work Steals: " << metrics_collector_.getWorkStealCount(server_id) << "\n";
+            std::cout << "  Records Forwarded: " << metrics_collector_.getRecordsForwardedCount(server_id) << "\n";
+            last_log = now;
         }
-        
-        std::cout << "\n--- PERFORMING SPATIAL ANALYSIS ON SERVER " << server_id << " ---\n";
-        std::cout << "Processing " << localCollisionData.size() << " collision records\n";
-        
-        // Process the data with SpatialAnalysis
-        spatialAnalysis.processCollisions(localCollisionData);
-        
-        // Identify and print high-risk areas
-        spatialAnalysis.identifyHighRiskAreas();
-        
-        std::cout << "--- END OF SPATIAL ANALYSIS ---\n\n";
+    }
+
+    void processAndReplicate(const CollisionData& data) {
+        // Add to local queue if we have space
+        if (queue_size < max_queue_size) {
+            local_queue.push_back(data);
+            queue_size++;
+            metrics_collector_.recordRecordProcessed();
+            
+            // Replicate to other servers (write quorum)
+            replicateData(data);
+        } else {
+            // Queue is full, try to steal work
+            stealWorkFromOtherServers();
+        }
+    }
+
+    // Add this method to the GenericServer class
+    ServerMetrics getCurrentMetrics() {
+        ServerMetrics metrics;
+        metrics.set_cpu_utilization(cpu_load);
+        metrics.set_message_queue_length(queue_size);
+        metrics.set_memory_usage(getMemoryUsage());
+        metrics.set_avg_network_latency(network_latency);
+        return metrics;
     }
 
 public:
     GenericServer(const std::string& config_path) 
-        : is_entry_point(false),
+        : server_id("server_" + std::to_string(std::chrono::system_clock::now().time_since_epoch().count())),
+          is_entry_point(false),
           spatialAnalysis(10, 2),  // 10 injuries or 2 deaths to mark area high-risk
           config_(loadConfig(config_path)),
-          replication_manager_(config_path, config_) {  // Initialize with both parameters
+          replication_manager_(config_, server_id),
+          metrics_collector_(server_id) {
         // Use the global value if it's been set via command line
         if (g_expected_total_dataset_size > 0) {
             total_dataset_size = g_expected_total_dataset_size;
@@ -550,16 +582,33 @@ public:
         config_file >> config;
         
         // Parse server configuration
-        server_id = config["server_id"];
         server_address = config["address"];
         server_port = config["port"];
         is_entry_point = config["is_entry_point"];
         
         std::cout << "Configuring server " << server_id 
-                  << " at " << server_address << ":" << server_port << std::endl;
+                  << " as " << (is_entry_point ? "entry point" : "regular server") 
+                  << std::endl;
+        
+        // Initialize total dataset size from config if specified
+        if (config.contains("total_dataset_size")) {
+            total_dataset_size = config["total_dataset_size"];
+            std::cout << "Using dataset size from config: " 
+                      << total_dataset_size << " records" << std::endl;
+        }
+        
+        // Load configuration from JSON file
+        std::ifstream config_file_old(config_path);
+        if (!config_file_old.is_open()) {
+            std::cerr << "Failed to open config file: " << config_path << std::endl;
+            exit(1);
+        }
+        
+        json config_old;
+        config_file_old >> config_old;
         
         // Parse network configuration
-        for (const auto& node : config["network"]) {
+        for (const auto& node : config_old["network"]) {
             ProcessNode process_node;
             process_node.id = node["id"];
             process_node.address = node["address"];
@@ -633,29 +682,16 @@ public:
         }
     }
     
-    // Handle incoming collision data from Python client (entry point)
+    // Handle incoming collision data from client
     Status StreamCollisions(ServerContext* context,
                           grpc::ServerReader<CollisionData>* reader,
-                          Empty* response) override {
-        // Only process this if the server is an entry point
-        if (!is_entry_point) {
-            return Status(grpc::StatusCode::FAILED_PRECONDITION, 
-                         "This server is not configured as an entry point");
-        }
-        
+                          Empty* response) {
         CollisionData collision;
         int count = 0;
-        std::map<std::string, int> routing_stats;
-        
-        // Add at the beginning:
-        static int entry_count = 0;
         
         // Read streaming data from client
         while (reader->Read(&collision)) {
             count++;
-            entry_count++;  // Count all entries ever received
-            
-            // Increment total records seen for ALL records at entry point
             total_records_seen++;
             
             // Log progress
@@ -663,105 +699,69 @@ public:
                 std::cout << "Received " << count << " records" << std::endl;
             }
             
-            // Determine if this server should keep the data locally
-            bool keep_locally = shouldKeepLocally(collision);
+            // Process the data locally and replicate
+            processAndReplicate(collision);
             
-            if (keep_locally) {
-                records_kept_locally++;
-                
-                // Convert and store for SpatialAnalysis
-                localCollisionData.push_back(convertToCSVRow(collision));
-                
-                // No target server, store locally
-                if (count % 100 == 0) {
-                    std::cout << "Data kept locally on entry point server" << std::endl;
-                }
-                continue;
-            }
+            // Update metrics
+            updateMetrics();
             
-            // Otherwise, determine which server to route this data to
-            std::string target_server = chooseTargetServer(collision);
-            
-            if (!target_server.empty()) {
-                // Update routing statistics
-                routing_stats[target_server]++;
-                records_forwarded[target_server]++;
-                
-                // Check if target is on local machine for shared memory
-                bool is_local = (network_nodes[target_server].address == network_nodes[server_id].address);
-                
-                // Try to write to shared memory if local
-                if (is_local && shared_memories.find(target_server) != shared_memories.end() && 
-                    writeToSharedMemory(target_server, collision)) {
-                    // Successfully used shared memory
-                    if (count % 500 == 0) {  // Reduce log spam
-                    std::cout << "Data written to shared memory for " << target_server << std::endl;
-                    }
-                } else {
-                    // Use gRPC
-                    CollisionBatch batch;
-                    *batch.add_collisions() = collision;
-                    forwardDataToServer(target_server, batch);
-                    
-                    if (count % 500 == 0) {  // Reduce log spam
-                        std::cout << "Data sent via gRPC to " << target_server << std::endl;
-                    }
-                }
-            } else {
-                // No available connection but we should have forwarded - rare case
-                records_kept_locally++;
-                if (count % 100 == 0) {
-                    std::cout << "No route available, keeping locally" << std::endl;
-                }
-            }
-            
-            // Add periodic reporting similar to what other servers use
-            if (entry_count % 1000 == 0) {  // Every 1000 records (adjust as needed)
-                std::cout << "\n--- PERIODIC DATA DISTRIBUTION REPORT (ENTRY POINT) ---\n";
-                reportEnhancedDistributionStats();
-                std::cout << "--- END PERIODIC REPORT ---\n\n";
+            // Check if we should steal work from other servers
+            if (shouldStealWork()) {
+                stealWorkFromOtherServers();
             }
         }
-        
-        // Print routing statistics
-        std::cout << "Finished receiving " << count << " records" << std::endl;
-        std::cout << "Routing statistics:" << std::endl;
-        for (const auto& stat : routing_stats) {
-            std::cout << "  Sent to " << stat.first << ": " << stat.second << " records" << std::endl;
-        }
-        
-        // Report distribution stats and perform analysis after processing all records
-        reportEnhancedDistributionStats();
-        processLocalData();
         
         return Status::OK;
     }
     
-    // Handle forwarded data from other servers
-    Status ForwardData(ServerContext* context, const CollisionBatch& batch, Empty* response) {
-        for (const auto& data : batch.collisions()) {
-            // Instead of round-robin, use ranking
-            std::string targetServer = chooseTargetServer(data);
-            
-            if (targetServer != server_id) {
-                forwardDataToServer(targetServer, batch);
-            } else {
-                processLocally(data);
-            }
+    // Handle work stealing requests
+    Status StealWork(ServerContext* context,
+                    const StealRequest* request,
+                    StealResponse* response) override {
+        // Check if we have enough work to share
+        if (local_queue.size() < min_queue_size) {
+            return Status(grpc::StatusCode::RESOURCE_EXHAUSTED,
+                        "Not enough work to share");
         }
+        
+        // Calculate how many items to share based on our load
+        int items_to_share = calculateItemsToShare();
+        
+        // Share the items
+        for (int i = 0; i < items_to_share && !local_queue.empty(); i++) {
+            auto* message = response->add_stolen_messages();
+            *message = local_queue.back();
+            local_queue.pop_back();
+        }
+        
+        // Update metrics
+        metrics_collector_.recordWorkSteal(request->requester_id(), server_id);
         return Status::OK;
     }
     
-    // Handle sharing of analysis results
-    Status ShareAnalysis(ServerContext* context,
-                        const RiskAssessment* assessment,
-                        Empty* response) override {
-        std::cout << "Received risk assessment for " << assessment->borough() 
-                  << " " << assessment->zip_code() << std::endl;
+    // Handle metrics updates
+    Status UpdateMetrics(ServerContext* context,
+                        const MetricsUpdate* request,
+                        MetricsResponse* response) override {
+        // Update our metrics
+        updateMetrics();
         
-        // Process the assessment data
-        // ...
+        // Return current metrics
+        response->set_success(true);
+        response->set_message("Metrics updated successfully");
+        return Status::OK;
+    }
+    
+    // Handle replica synchronization
+    Status SyncReplicas(ServerContext* context,
+                       const SyncRequest* request,
+                       SyncResponse* response) override {
+        // Update hop counts
+        hop_counts[request->server_id()] = 1;  // Default hop count
         
+        // Calculate and return our rank
+        double rank = calculateServerRank();
+        response->set_success(true);
         return Status::OK;
     }
     
@@ -778,7 +778,7 @@ public:
     // Add a new RPC implementation
     Status SetDatasetInfo(ServerContext* context,
                          const DatasetInfo* info,
-                         Empty* response) override {
+                         Empty* response) {
         total_dataset_size = info->total_size();
         std::cout << "Received dataset size information: " << total_dataset_size << " records" << std::endl;
         
@@ -788,61 +788,6 @@ public:
         return Status::OK;
     }
     
-    Status StealWork(ServerContext* context,
-                    const StealRequest* request,
-                    StealResponse* response) {
-        auto stolen_messages = replication_manager_.handleStealRequest(
-            request->requested_items());
-        *response->mutable_stolen_messages() = {
-            stolen_messages.begin(), 
-            stolen_messages.end()
-        };
-        return Status::OK;
-    }
-
-    Status UpdateMetrics(ServerContext* context,
-                        const MetricsUpdate* request,
-                        MetricsResponse* response) {
-        // Update metrics
-        current_metrics_.cpu_load = getCpuLoad();
-        current_metrics_.queue_size = message_queue_.size();
-        current_metrics_.memory_usage = getMemoryUsage();
-        current_metrics_.network_latency = measureAverageLatency();
-        current_metrics_.last_update = std::chrono::system_clock::now();
-        return Status::OK;
-    }
-
-private:
-    // Add a method to forward dataset size to all connected servers
-    void broadcastDatasetSize() {
-        // Only entry point should broadcast the total size
-        if (!is_entry_point) return;
-        
-        // Create RPC message
-        DatasetInfo info;
-        info.set_total_size(total_dataset_size);
-        
-        // Send to each connected server
-        for (const std::string& server_id : connections) {
-            if (server_stubs.find(server_id) == server_stubs.end()) {
-                initServerStub(server_id);
-            }
-            
-            ClientContext context;
-            Empty response;
-            
-            // We need to add this RPC to the InterServerService too
-            Status status = server_stubs[server_id]->SetTotalDatasetSize(&context, info, &response);
-            
-            if (status.ok()) {
-                std::cout << "Forwarded dataset size to server " << server_id << std::endl;
-            } else {
-                std::cerr << "Failed to forward dataset size to " << server_id << std::endl;
-            }
-        }
-    }
-
-    // Add a new RPC implementation
     Status SetTotalDatasetSize(ServerContext* context,
                               const DatasetInfo* info,
                               Empty* response) override {
@@ -882,44 +827,226 @@ private:
         return bestServer == server_id;
     }
 
-    void updateMetrics() {
-        current_metrics_.cpu_load = getCpuLoad();
-        current_metrics_.queue_size = message_queue_.size();
-        current_metrics_.memory_usage = getMemoryUsage();
-        current_metrics_.network_latency = measureAverageLatency();
+    // Process local data using SpatialAnalysis
+    void processLocalData() {
+        if (localCollisionData.empty()) {
+            std::cout << "No local data to analyze on server " << server_id << std::endl;
+            return;
+        }
+        
+        std::cout << "\n--- PERFORMING SPATIAL ANALYSIS ON SERVER " << server_id << " ---\n";
+        std::cout << "Processing " << localCollisionData.size() << " collision records\n";
+        
+        // Process the data with SpatialAnalysis
+        spatialAnalysis.processCollisions(localCollisionData);
+        
+        // Identify and print high-risk areas
+        spatialAnalysis.identifyHighRiskAreas();
+        
+        std::cout << "--- END OF SPATIAL ANALYSIS ---\n\n";
     }
 
-    void processLocally(const CollisionData& data) {
-        // Implement local processing
-        // For now, just print
-        std::cout << "Processing collision data locally" << std::endl;
-    }
-};
-
-class ReplicationServer final : public ReplicationService::Service {
-public:
-    explicit ReplicationServer(const std::string& config_path) 
-        : server_id_(config_path) {
-    }
-
-    grpc::Status StealWork(grpc::ServerContext* context,
-                          const mini2::StealRequest* request,
-                          mini2::StealResponse* response) override {
-        // Your implementation
-        return grpc::Status::OK;
-    }
-
-    grpc::Status UpdateMetrics(grpc::ServerContext* context,
-                              const mini2::MetricsUpdate* request,
-                              mini2::MetricsResponse* response) override {
-        // Your implementation
-        return grpc::Status::OK;
+    // Convert CollisionData (protobuf) to CSVRow for analysis
+    CSVRow convertToCSVRow(const CollisionData& data) {
+        CSVRow row;
+        row.crash_date = data.crash_date();
+        row.crash_time = data.crash_time();
+        row.borough = data.borough();
+        row.zip_code = data.zip_code().empty() ? 0 : std::stoi(data.zip_code());
+        row.latitude = data.latitude();
+        row.longitude = data.longitude();
+        row.location = data.location();
+        row.on_street_name = data.on_street_name();
+        row.cross_street_name = data.cross_street_name();
+        row.off_street_name = data.off_street_name();
+        row.persons_injured = data.number_of_persons_injured();
+        row.persons_killed = data.number_of_persons_killed();
+        row.pedestrians_injured = data.number_of_pedestrians_injured();
+        row.pedestrians_killed = data.number_of_pedestrians_killed();
+        row.cyclists_injured = data.number_of_cyclist_injured();
+        row.cyclists_killed = data.number_of_cyclist_killed();
+        row.motorists_injured = data.number_of_motorist_injured();
+        row.motorists_killed = data.number_of_motorist_killed();
+        
+        // Additional fields would be set here
+        return row;
     }
 
 private:
-    std::string server_id_;
-    ReplicationManager::Config config_;
-    std::map<std::string, std::unique_ptr<mini2::ReplicationService::Stub>> neighbor_stubs_;
+    // Add a method to forward dataset size to all connected servers
+    void broadcastDatasetSize() {
+        // Only entry point should broadcast the total size
+        if (!is_entry_point) return;
+        
+        // Create RPC message
+        DatasetInfo info;
+        info.set_total_size(total_dataset_size);
+        
+        // Send to each connected server
+        for (const std::string& server_id : connections) {
+            if (server_stubs.find(server_id) == server_stubs.end()) {
+                initServerStub(server_id);
+            }
+            
+            ClientContext context;
+            Empty response;
+            
+            // We need to add this RPC to the InterServerService too
+            Status status = server_stubs[server_id]->SetTotalDatasetSize(&context, info, &response);
+            
+            if (status.ok()) {
+                std::cout << "Forwarded dataset size to server " << server_id << std::endl;
+            } else {
+                std::cerr << "Failed to forward dataset size to " << server_id << std::endl;
+            }
+        }
+    }
+
+    bool shouldStealWork() {
+        return queue_size < min_queue_size && 
+               cpu_load < steal_threshold;
+    }
+    
+    void stealWorkFromOtherServers() {
+        // Get server ranks
+        updateServerRanks();
+        
+        // Try to steal from servers with higher ranks
+        for (const auto& [server_id, rank] : server_ranks) {
+            if (rank > calculateServerRank() && 
+                hop_counts[server_id] <= max_steal_distance) {
+                
+                StealRequest request;
+                request.set_requester_id(server_id);
+                request.set_requested_count(calculateItemsToShare());
+                *request.mutable_requester_metrics() = getCurrentMetrics();
+                
+                StealResponse response;
+                ClientContext context;
+                auto status = server_stubs[server_id]->StealWork(&context, request, &response);
+            
+            if (status.ok()) {
+                    for (const auto& message : response.stolen_messages()) {
+                        processAndReplicate(message);
+                    }
+                }
+            }
+        }
+    }
+    
+    void updateServerRanks() {
+        // Request metrics from all servers
+        for (const auto& [server_id, stub] : server_stubs) {
+            MetricsUpdate request;
+            request.set_server_id(server_id);
+            auto* metrics = request.mutable_metrics();
+            metrics->set_cpu_utilization(cpu_load);
+            metrics->set_message_queue_length(queue_size);
+            metrics->set_memory_usage(getMemoryUsage());
+            metrics->set_avg_network_latency(network_latency);
+            
+            ClientContext context;
+            MetricsResponse response;
+            
+            auto status = stub->UpdateMetrics(&context, request, &response);
+            if (status.ok() && response.success()) {
+                // Calculate rank based on metrics
+                double rank = calculateServerRank();
+                server_ranks[server_id] = rank;
+            }
+        }
+    }
+    
+    double calculateServerRank() {
+        double score = 
+            weights_.queue_size * normalizeQueueSize(queue_size) +
+            weights_.cpu_load * cpu_load +
+            weights_.memory_usage * getMemoryUsage() +
+            weights_.network_latency * normalizeLatency(network_latency) +
+            weights_.distance * normalizeDistance(calculateDistance(server_id));
+        return score;
+    }
+    
+    int calculateItemsToShare() {
+        // Share more items if we have high load
+        return std::min(10, static_cast<int>(queue_size * 0.1));
+    }
+    
+    int calculateItemsToSteal() {
+        // Steal more items if we have low load
+        return std::min(10, static_cast<int>((min_queue_size - queue_size) * 0.5));
+    }
+
+    void replicateData(const CollisionData& data) {
+        // Get server ranks
+        updateServerRanks();
+        
+        // Sort servers by rank
+        std::vector<std::pair<std::string, double>> sorted_servers;
+        for (const auto& [server_id, rank] : server_ranks) {
+            if (server_id != this->server_id) {
+                sorted_servers.emplace_back(server_id, rank);
+            }
+        }
+        std::sort(sorted_servers.begin(), sorted_servers.end(),
+                 [](const auto& a, const auto& b) { return a.second > b.second; });
+        
+        // Replicate to W-1 servers (since we already have one copy)
+        int replicas_created = 0;
+        for (const auto& [server_id, rank] : sorted_servers) {
+            if (replicas_created >= W-1) break;
+            
+            // Check if server is within max_steal_distance
+            if (hop_counts[server_id] > max_steal_distance) continue;
+            
+            // Send data to server
+            StealRequest request;
+            request.set_requester_id(server_id);
+            request.set_requested_count(1);
+            *request.mutable_requester_metrics() = getCurrentMetrics();
+            
+            StealResponse response;
+            ClientContext context;
+            auto status = server_stubs[server_id]->StealWork(&context, request, &response);
+            
+            if (status.ok()) {
+                replicas_created++;
+            }
+        }
+    }
+};
+
+// Create a wrapper service class
+class ServerService : public InterServerService::Service {
+public:
+    explicit ServerService(GenericServer* server) : server_(server) {}
+
+    Status StreamCollisions(ServerContext* context,
+                          grpc::ServerReader<CollisionData>* reader,
+                          Empty* response) {
+        return server_->StreamCollisions(context, reader, response);
+    }
+
+    Status StealWork(ServerContext* context,
+                    const StealRequest* request,
+                    StealResponse* response) {
+        return server_->StealWork(context, request, response);
+    }
+
+    Status UpdateMetrics(ServerContext* context,
+                        const MetricsUpdate* request,
+                        MetricsResponse* response) {
+        return server_->UpdateMetrics(context, request, response);
+    }
+
+    Status SyncReplicas(ServerContext* context,
+                       const SyncRequest* request,
+                       SyncResponse* response) {
+        return server_->SyncReplicas(context, request, response);
+    }
+
+private:
+    GenericServer* server_;
 };
 
 int main(int argc, char** argv) {
@@ -945,20 +1072,19 @@ int main(int argc, char** argv) {
     // Create and configure the server
     GenericServer server(config_path);
     
+    // Create the server service
+    ServerService service(&server);
+    
     // Set up gRPC server
     ServerBuilder builder;
     builder.AddListeningPort(server.getServerAddress(), grpc::InsecureServerCredentials());
 
-    // Explicitly cast to resolve the ambiguity
-    if (server.isEntryPoint()) {
-        builder.RegisterService(static_cast<EntryPointService::Service*>(&server));
-    }
-    builder.RegisterService(static_cast<InterServerService::Service*>(&server));
+    // Register the server service
+    builder.RegisterService(&service);
     
     // Start the server
     std::unique_ptr<Server> grpc_server(builder.BuildAndStart());
-    std::cout << "Server " << (server.isEntryPoint() ? "(entry point) " : "") 
-              << "listening on " << server.getServerAddress() << std::endl;
+    std::cout << "Server listening on " << server.getServerAddress() << std::endl;
     
     // Wait for server to finish
     grpc_server->Wait();

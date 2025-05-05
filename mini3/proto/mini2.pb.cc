@@ -78,16 +78,21 @@ struct SyncRequestDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyncRequestDefaultTypeInternal _SyncRequest_default_instance_;
 
-inline constexpr StealRequest::Impl_::Impl_(
+inline constexpr ServerMetrics::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
-      : source_server_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        requested_items_{0},
+      : cpu_utilization_{0},
+        memory_usage_{0},
+        avg_network_latency_{0},
+        message_queue_length_{0},
+        max_queue_length_{0},
+        avg_message_age_{0},
+        max_message_age_{0},
+        max_acceptable_latency_{0},
+        hop_distance_{0},
         _cached_size_{0} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR StealRequest::StealRequest(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR ServerMetrics::ServerMetrics(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
@@ -95,16 +100,16 @@ PROTOBUF_CONSTEXPR StealRequest::StealRequest(::_pbi::ConstantInitialized)
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct StealRequestDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR StealRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~StealRequestDefaultTypeInternal() {}
+struct ServerMetricsDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ServerMetricsDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ServerMetricsDefaultTypeInternal() {}
   union {
-    StealRequest _instance;
+    ServerMetrics _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 StealRequestDefaultTypeInternal _StealRequest_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ServerMetricsDefaultTypeInternal _ServerMetrics_default_instance_;
 
 inline constexpr RiskAssessment::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -138,37 +143,6 @@ struct RiskAssessmentDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RiskAssessmentDefaultTypeInternal _RiskAssessment_default_instance_;
 
-inline constexpr MetricsUpdate::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : server_id_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        cpu_load_{0},
-        memory_usage_{0},
-        network_latency_{0},
-        queue_size_{0},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR MetricsUpdate::MetricsUpdate(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct MetricsUpdateDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MetricsUpdateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MetricsUpdateDefaultTypeInternal() {}
-  union {
-    MetricsUpdate _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MetricsUpdateDefaultTypeInternal _MetricsUpdate_default_instance_;
-
 inline constexpr MetricsResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : message_(
@@ -196,37 +170,6 @@ struct MetricsResponseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MetricsResponseDefaultTypeInternal _MetricsResponse_default_instance_;
-
-inline constexpr Message::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : content_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        id_(
-            &::google::protobuf::internal::fixed_address_empty_string,
-            ::_pbi::ConstantInitialized()),
-        timestamp_{::int64_t{0}},
-        _cached_size_{0} {}
-
-template <typename>
-PROTOBUF_CONSTEXPR Message::Message(::_pbi::ConstantInitialized)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(_class_data_.base()),
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
-}
-struct MessageDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MessageDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MessageDefaultTypeInternal() {}
-  union {
-    Message _instance;
-  };
-};
-
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MessageDefaultTypeInternal _Message_default_instance_;
               template <typename>
 PROTOBUF_CONSTEXPR Empty::Empty(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
@@ -400,6 +343,10 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr StealResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : stolen_messages_{},
+        error_message_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        success_{false},
         _cached_size_{0} {}
 
 template <typename>
@@ -421,6 +368,95 @@ struct StealResponseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 StealResponseDefaultTypeInternal _StealResponse_default_instance_;
+
+inline constexpr StealRequest::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        requester_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        requester_metrics_{nullptr},
+        requested_count_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR StealRequest::StealRequest(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct StealRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR StealRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~StealRequestDefaultTypeInternal() {}
+  union {
+    StealRequest _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 StealRequestDefaultTypeInternal _StealRequest_default_instance_;
+
+inline constexpr ServerInfo::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        server_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        address_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        metrics_{nullptr},
+        port_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ServerInfo::ServerInfo(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct ServerInfoDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ServerInfoDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ServerInfoDefaultTypeInternal() {}
+  union {
+    ServerInfo _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ServerInfoDefaultTypeInternal _ServerInfo_default_instance_;
+
+inline constexpr MetricsUpdate::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        server_id_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        metrics_{nullptr} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR MetricsUpdate::MetricsUpdate(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct MetricsUpdateDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MetricsUpdateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MetricsUpdateDefaultTypeInternal() {}
+  union {
+    MetricsUpdate _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MetricsUpdateDefaultTypeInternal _MetricsUpdate_default_instance_;
 
 inline constexpr CollisionBatch::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -446,6 +482,31 @@ struct CollisionBatchDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 CollisionBatchDefaultTypeInternal _CollisionBatch_default_instance_;
+
+inline constexpr ServerList::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : servers_{},
+        _cached_size_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ServerList::ServerList(::_pbi::ConstantInitialized)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(_class_data_.base()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(::_pbi::ConstantInitialized()) {
+}
+struct ServerListDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ServerListDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ServerListDefaultTypeInternal() {}
+  union {
+    ServerList _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ServerListDefaultTypeInternal _ServerList_default_instance_;
 }  // namespace mini2
 static constexpr const ::_pb::EnumDescriptor**
     file_level_enum_descriptors_mini2_2eproto = nullptr;
@@ -535,16 +596,84 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::mini2::DatasetInfo, _impl_.total_size_),
         ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::mini2::Message, _internal_metadata_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _internal_metadata_),
         ~0u,  // no _extensions_
         ~0u,  // no _oneof_case_
         ~0u,  // no _weak_field_map_
         ~0u,  // no _inlined_string_donated_
         ~0u,  // no _split_
         ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::mini2::Message, _impl_.content_),
-        PROTOBUF_FIELD_OFFSET(::mini2::Message, _impl_.id_),
-        PROTOBUF_FIELD_OFFSET(::mini2::Message, _impl_.timestamp_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.cpu_utilization_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.memory_usage_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.avg_network_latency_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.message_queue_length_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.max_queue_length_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.avg_message_age_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.max_message_age_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.max_acceptable_latency_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerMetrics, _impl_.hop_distance_),
+        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _impl_.requester_id_),
+        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _impl_.requested_count_),
+        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _impl_.requester_metrics_),
+        ~0u,
+        ~0u,
+        0,
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::mini2::StealResponse, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::mini2::StealResponse, _impl_.success_),
+        PROTOBUF_FIELD_OFFSET(::mini2::StealResponse, _impl_.stolen_messages_),
+        PROTOBUF_FIELD_OFFSET(::mini2::StealResponse, _impl_.error_message_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerInfo, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerInfo, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerInfo, _impl_.server_id_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerInfo, _impl_.address_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerInfo, _impl_.port_),
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerInfo, _impl_.metrics_),
+        ~0u,
+        ~0u,
+        ~0u,
+        0,
+        ~0u,  // no _has_bits_
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerList, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::mini2::ServerList, _impl_.servers_),
+        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.server_id_),
+        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.metrics_),
+        ~0u,
+        0,
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::mini2::MetricsResponse, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -555,38 +684,6 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::mini2::MetricsResponse, _impl_.success_),
         PROTOBUF_FIELD_OFFSET(::mini2::MetricsResponse, _impl_.message_),
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _impl_.source_server_),
-        PROTOBUF_FIELD_OFFSET(::mini2::StealRequest, _impl_.requested_items_),
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::mini2::StealResponse, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::mini2::StealResponse, _impl_.stolen_messages_),
-        ~0u,  // no _has_bits_
-        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _internal_metadata_),
-        ~0u,  // no _extensions_
-        ~0u,  // no _oneof_case_
-        ~0u,  // no _weak_field_map_
-        ~0u,  // no _inlined_string_donated_
-        ~0u,  // no _split_
-        ~0u,  // no sizeof(Split)
-        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.server_id_),
-        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.cpu_load_),
-        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.queue_size_),
-        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.memory_usage_),
-        PROTOBUF_FIELD_OFFSET(::mini2::MetricsUpdate, _impl_.network_latency_),
         ~0u,  // no _has_bits_
         PROTOBUF_FIELD_OFFSET(::mini2::SyncRequest, _internal_metadata_),
         ~0u,  // no _extensions_
@@ -622,14 +719,16 @@ static const ::_pbi::MigrationSchema
         {50, -1, -1, sizeof(::mini2::CollisionBatch)},
         {59, -1, -1, sizeof(::mini2::RiskAssessment)},
         {71, -1, -1, sizeof(::mini2::DatasetInfo)},
-        {80, -1, -1, sizeof(::mini2::Message)},
-        {91, -1, -1, sizeof(::mini2::MetricsResponse)},
-        {101, -1, -1, sizeof(::mini2::StealRequest)},
+        {80, -1, -1, sizeof(::mini2::ServerMetrics)},
+        {97, 108, -1, sizeof(::mini2::StealRequest)},
         {111, -1, -1, sizeof(::mini2::StealResponse)},
-        {120, -1, -1, sizeof(::mini2::MetricsUpdate)},
-        {133, -1, -1, sizeof(::mini2::SyncRequest)},
-        {142, -1, -1, sizeof(::mini2::SyncResponse)},
-        {151, -1, -1, sizeof(::mini2::Empty)},
+        {122, 134, -1, sizeof(::mini2::ServerInfo)},
+        {138, -1, -1, sizeof(::mini2::ServerList)},
+        {147, 157, -1, sizeof(::mini2::MetricsUpdate)},
+        {159, -1, -1, sizeof(::mini2::MetricsResponse)},
+        {169, -1, -1, sizeof(::mini2::SyncRequest)},
+        {178, -1, -1, sizeof(::mini2::SyncResponse)},
+        {187, -1, -1, sizeof(::mini2::Empty)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::mini2::_CollisionData_default_instance_._instance,
@@ -637,11 +736,13 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::mini2::_CollisionBatch_default_instance_._instance,
     &::mini2::_RiskAssessment_default_instance_._instance,
     &::mini2::_DatasetInfo_default_instance_._instance,
-    &::mini2::_Message_default_instance_._instance,
-    &::mini2::_MetricsResponse_default_instance_._instance,
+    &::mini2::_ServerMetrics_default_instance_._instance,
     &::mini2::_StealRequest_default_instance_._instance,
     &::mini2::_StealResponse_default_instance_._instance,
+    &::mini2::_ServerInfo_default_instance_._instance,
+    &::mini2::_ServerList_default_instance_._instance,
     &::mini2::_MetricsUpdate_default_instance_._instance,
+    &::mini2::_MetricsResponse_default_instance_._instance,
     &::mini2::_SyncRequest_default_instance_._instance,
     &::mini2::_SyncResponse_default_instance_._instance,
     &::mini2::_Empty_default_instance_._instance,
@@ -678,43 +779,53 @@ const char descriptor_table_protodef_mini2_2eproto[] ABSL_ATTRIBUTE_SECTION_VARI
     "skAssessment\022\017\n\007borough\030\001 \001(\t\022\020\n\010zip_cod"
     "e\030\002 \001(\t\022\026\n\016total_injuries\030\003 \001(\005\022\030\n\020total"
     "_fatalities\030\004 \001(\005\"!\n\013DatasetInfo\022\022\n\ntota"
-    "l_size\030\001 \001(\003\"9\n\007Message\022\017\n\007content\030\001 \001(\t"
-    "\022\n\n\002id\030\002 \001(\t\022\021\n\ttimestamp\030\003 \001(\003\"3\n\017Metri"
-    "csResponse\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002"
-    " \001(\t\">\n\014StealRequest\022\025\n\rsource_server\030\001 "
-    "\001(\t\022\027\n\017requested_items\030\002 \001(\005\"8\n\rStealRes"
-    "ponse\022\'\n\017stolen_messages\030\001 \003(\0132\016.mini2.M"
-    "essage\"w\n\rMetricsUpdate\022\021\n\tserver_id\030\001 \001"
-    "(\t\022\020\n\010cpu_load\030\002 \001(\001\022\022\n\nqueue_size\030\003 \001(\005"
-    "\022\024\n\014memory_usage\030\004 \001(\001\022\027\n\017network_latenc"
-    "y\030\005 \001(\001\" \n\013SyncRequest\022\021\n\tserver_id\030\001 \001("
-    "\t\"\037\n\014SyncResponse\022\017\n\007success\030\001 \001(\010\"\007\n\005Em"
-    "pty2\205\001\n\021EntryPointService\022:\n\020StreamColli"
-    "sions\022\024.mini2.CollisionData\032\014.mini2.Empt"
-    "y\"\000(\001\0224\n\016SetDatasetInfo\022\022.mini2.DatasetI"
-    "nfo\032\014.mini2.Empty\"\0002\275\001\n\022InterServerServi"
-    "ce\0224\n\013ForwardData\022\025.mini2.CollisionBatch"
-    "\032\014.mini2.Empty\"\000\0226\n\rShareAnalysis\022\025.mini"
-    "2.RiskAssessment\032\014.mini2.Empty\"\000\0229\n\023SetT"
-    "otalDatasetSize\022\022.mini2.DatasetInfo\032\014.mi"
-    "ni2.Empty\"\0002\312\001\n\022ReplicationService\0228\n\tSt"
-    "ealWork\022\023.mini2.StealRequest\032\024.mini2.Ste"
-    "alResponse\"\000\022\?\n\rUpdateMetrics\022\024.mini2.Me"
-    "tricsUpdate\032\026.mini2.MetricsResponse\"\000\0229\n"
-    "\014SyncReplicas\022\022.mini2.SyncRequest\032\023.mini"
-    "2.SyncResponse\"\000b\006proto3"
+    "l_size\030\001 \001(\003\"\373\001\n\rServerMetrics\022\027\n\017cpu_ut"
+    "ilization\030\001 \001(\001\022\024\n\014memory_usage\030\002 \001(\001\022\033\n"
+    "\023avg_network_latency\030\003 \001(\001\022\034\n\024message_qu"
+    "eue_length\030\004 \001(\005\022\030\n\020max_queue_length\030\005 \001"
+    "(\005\022\027\n\017avg_message_age\030\006 \001(\001\022\027\n\017max_messa"
+    "ge_age\030\007 \001(\001\022\036\n\026max_acceptable_latency\030\010"
+    " \001(\001\022\024\n\014hop_distance\030\t \001(\005\"n\n\014StealReque"
+    "st\022\024\n\014requester_id\030\001 \001(\t\022\027\n\017requested_co"
+    "unt\030\002 \001(\005\022/\n\021requester_metrics\030\003 \001(\0132\024.m"
+    "ini2.ServerMetrics\"f\n\rStealResponse\022\017\n\007s"
+    "uccess\030\001 \001(\010\022-\n\017stolen_messages\030\002 \003(\0132\024."
+    "mini2.CollisionData\022\025\n\rerror_message\030\003 \001"
+    "(\t\"e\n\nServerInfo\022\021\n\tserver_id\030\001 \001(\t\022\017\n\007a"
+    "ddress\030\002 \001(\t\022\014\n\004port\030\003 \001(\005\022%\n\007metrics\030\004 "
+    "\001(\0132\024.mini2.ServerMetrics\"0\n\nServerList\022"
+    "\"\n\007servers\030\001 \003(\0132\021.mini2.ServerInfo\"I\n\rM"
+    "etricsUpdate\022\021\n\tserver_id\030\001 \001(\t\022%\n\007metri"
+    "cs\030\002 \001(\0132\024.mini2.ServerMetrics\"3\n\017Metric"
+    "sResponse\022\017\n\007success\030\001 \001(\010\022\017\n\007message\030\002 "
+    "\001(\t\" \n\013SyncRequest\022\021\n\tserver_id\030\001 \001(\t\"\037\n"
+    "\014SyncResponse\022\017\n\007success\030\001 \001(\010\"\007\n\005Empty2"
+    "\240\004\n\022InterServerService\0224\n\013ForwardData\022\025."
+    "mini2.CollisionBatch\032\014.mini2.Empty\"\000\0226\n\r"
+    "ShareAnalysis\022\025.mini2.RiskAssessment\032\014.m"
+    "ini2.Empty\"\000\0229\n\023SetTotalDatasetSize\022\022.mi"
+    "ni2.DatasetInfo\032\014.mini2.Empty\"\000\0228\n\tSteal"
+    "Work\022\023.mini2.StealRequest\032\024.mini2.StealR"
+    "esponse\"\000\022\?\n\rUpdateMetrics\022\024.mini2.Metri"
+    "csUpdate\032\026.mini2.MetricsResponse\"\000\0229\n\014Sy"
+    "ncReplicas\022\022.mini2.SyncRequest\032\023.mini2.S"
+    "yncResponse\"\000\0228\n\016RegisterServer\022\021.mini2."
+    "ServerInfo\032\021.mini2.ServerList\"\000\022:\n\020Unreg"
+    "isterServer\022\021.mini2.ServerInfo\032\021.mini2.S"
+    "erverList\"\000\0225\n\013HealthCheck\022\021.mini2.Serve"
+    "rInfo\032\021.mini2.ServerInfo\"\000b\006proto3"
 };
 static ::absl::once_flag descriptor_table_mini2_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_mini2_2eproto = {
     false,
     false,
-    2184,
+    2594,
     descriptor_table_protodef_mini2_2eproto,
     "mini2.proto",
     &descriptor_table_mini2_2eproto_once,
     nullptr,
     0,
-    13,
+    15,
     schemas,
     file_default_instances,
     TableStruct_mini2_2eproto::offsets,
@@ -2821,202 +2932,262 @@ void DatasetInfo::InternalSwap(DatasetInfo* PROTOBUF_RESTRICT other) {
 }
 // ===================================================================
 
-class Message::_Internal {
+class ServerMetrics::_Internal {
  public:
 };
 
-Message::Message(::google::protobuf::Arena* arena)
+ServerMetrics::ServerMetrics(::google::protobuf::Arena* arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
     : ::google::protobuf::Message(arena, _class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:mini2.Message)
+  // @@protoc_insertion_point(arena_constructor:mini2.ServerMetrics)
 }
-inline PROTOBUF_NDEBUG_INLINE Message::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::mini2::Message& from_msg)
-      : content_(arena, from.content_),
-        id_(arena, from.id_),
-        _cached_size_{0} {}
-
-Message::Message(
-    ::google::protobuf::Arena* arena,
-    const Message& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  Message* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.timestamp_ = from._impl_.timestamp_;
-
-  // @@protoc_insertion_point(copy_constructor:mini2.Message)
+ServerMetrics::ServerMetrics(
+    ::google::protobuf::Arena* arena, const ServerMetrics& from)
+    : ServerMetrics(arena) {
+  MergeFrom(from);
 }
-inline PROTOBUF_NDEBUG_INLINE Message::Impl_::Impl_(
+inline PROTOBUF_NDEBUG_INLINE ServerMetrics::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
-      : content_(arena),
-        id_(arena),
-        _cached_size_{0} {}
+      : _cached_size_{0} {}
 
-inline void Message::SharedCtor(::_pb::Arena* arena) {
+inline void ServerMetrics::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.timestamp_ = {};
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, cpu_utilization_),
+           0,
+           offsetof(Impl_, hop_distance_) -
+               offsetof(Impl_, cpu_utilization_) +
+               sizeof(Impl_::hop_distance_));
 }
-Message::~Message() {
-  // @@protoc_insertion_point(destructor:mini2.Message)
+ServerMetrics::~ServerMetrics() {
+  // @@protoc_insertion_point(destructor:mini2.ServerMetrics)
   SharedDtor(*this);
 }
-inline void Message::SharedDtor(MessageLite& self) {
-  Message& this_ = static_cast<Message&>(self);
+inline void ServerMetrics::SharedDtor(MessageLite& self) {
+  ServerMetrics& this_ = static_cast<ServerMetrics&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.content_.Destroy();
-  this_._impl_.id_.Destroy();
   this_._impl_.~Impl_();
 }
 
-inline void* Message::PlacementNew_(const void*, void* mem,
+inline void* ServerMetrics::PlacementNew_(const void*, void* mem,
                                         ::google::protobuf::Arena* arena) {
-  return ::new (mem) Message(arena);
+  return ::new (mem) ServerMetrics(arena);
 }
-constexpr auto Message::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(Message),
-                                            alignof(Message));
+constexpr auto ServerMetrics::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(ServerMetrics),
+                                            alignof(ServerMetrics));
 }
 PROTOBUF_CONSTINIT
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull Message::_class_data_ = {
+const ::google::protobuf::internal::ClassDataFull ServerMetrics::_class_data_ = {
     ::google::protobuf::internal::ClassData{
-        &_Message_default_instance_._instance,
+        &_ServerMetrics_default_instance_._instance,
         &_table_.header,
         nullptr,  // OnDemandRegisterArenaDtor
         nullptr,  // IsInitialized
-        &Message::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<Message>(),
+        &ServerMetrics::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<ServerMetrics>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        &Message::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<Message>(), &Message::ByteSizeLong,
-            &Message::_InternalSerialize,
+        &ServerMetrics::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<ServerMetrics>(), &ServerMetrics::ByteSizeLong,
+            &ServerMetrics::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(Message, _impl_._cached_size_),
+        PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_._cached_size_),
         false,
     },
-    &Message::kDescriptorMethods,
+    &ServerMetrics::kDescriptorMethods,
     &descriptor_table_mini2_2eproto,
     nullptr,  // tracker
 };
-const ::google::protobuf::internal::ClassData* Message::GetClassData() const {
+const ::google::protobuf::internal::ClassData* ServerMetrics::GetClassData() const {
   ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
   ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
   return _class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<2, 3, 0, 31, 2> Message::_table_ = {
+const ::_pbi::TcParseTable<4, 9, 0, 0, 2> ServerMetrics::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    3, 24,  // max_field_number, fast_idx_mask
+    9, 120,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967288,  // skipmap
+    4294966784,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    3,  // num_field_entries
+    9,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     _class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::mini2::Message>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::mini2::ServerMetrics>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
-    // string content = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(Message, _impl_.content_)}},
-    // string id = 2;
-    {::_pbi::TcParser::FastUS1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(Message, _impl_.id_)}},
-    // int64 timestamp = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint64_t, offsetof(Message, _impl_.timestamp_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(Message, _impl_.timestamp_)}},
+    // double cpu_utilization = 1;
+    {::_pbi::TcParser::FastF64S1,
+     {9, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.cpu_utilization_)}},
+    // double memory_usage = 2;
+    {::_pbi::TcParser::FastF64S1,
+     {17, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.memory_usage_)}},
+    // double avg_network_latency = 3;
+    {::_pbi::TcParser::FastF64S1,
+     {25, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.avg_network_latency_)}},
+    // int32 message_queue_length = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServerMetrics, _impl_.message_queue_length_), 63>(),
+     {32, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.message_queue_length_)}},
+    // int32 max_queue_length = 5;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServerMetrics, _impl_.max_queue_length_), 63>(),
+     {40, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.max_queue_length_)}},
+    // double avg_message_age = 6;
+    {::_pbi::TcParser::FastF64S1,
+     {49, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.avg_message_age_)}},
+    // double max_message_age = 7;
+    {::_pbi::TcParser::FastF64S1,
+     {57, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.max_message_age_)}},
+    // double max_acceptable_latency = 8;
+    {::_pbi::TcParser::FastF64S1,
+     {65, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.max_acceptable_latency_)}},
+    // int32 hop_distance = 9;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServerMetrics, _impl_.hop_distance_), 63>(),
+     {72, 63, 0, PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.hop_distance_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
   }}, {{
-    // string content = 1;
-    {PROTOBUF_FIELD_OFFSET(Message, _impl_.content_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // string id = 2;
-    {PROTOBUF_FIELD_OFFSET(Message, _impl_.id_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int64 timestamp = 3;
-    {PROTOBUF_FIELD_OFFSET(Message, _impl_.timestamp_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt64)},
+    // double cpu_utilization = 1;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.cpu_utilization_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // double memory_usage = 2;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.memory_usage_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // double avg_network_latency = 3;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.avg_network_latency_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // int32 message_queue_length = 4;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.message_queue_length_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // int32 max_queue_length = 5;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.max_queue_length_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // double avg_message_age = 6;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.avg_message_age_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // double max_message_age = 7;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.max_message_age_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // double max_acceptable_latency = 8;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.max_acceptable_latency_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
+    // int32 hop_distance = 9;
+    {PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.hop_distance_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
   }},
   // no aux_entries
   {{
-    "\15\7\2\0\0\0\0\0"
-    "mini2.Message"
-    "content"
-    "id"
   }},
 };
 
-PROTOBUF_NOINLINE void Message::Clear() {
-// @@protoc_insertion_point(message_clear_start:mini2.Message)
+PROTOBUF_NOINLINE void ServerMetrics::Clear() {
+// @@protoc_insertion_point(message_clear_start:mini2.ServerMetrics)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.content_.ClearToEmpty();
-  _impl_.id_.ClearToEmpty();
-  _impl_.timestamp_ = ::int64_t{0};
+  ::memset(&_impl_.cpu_utilization_, 0, static_cast<::size_t>(
+      reinterpret_cast<char*>(&_impl_.hop_distance_) -
+      reinterpret_cast<char*>(&_impl_.cpu_utilization_)) + sizeof(_impl_.hop_distance_));
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* Message::_InternalSerialize(
+        ::uint8_t* ServerMetrics::_InternalSerialize(
             const MessageLite& base, ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const Message& this_ = static_cast<const Message&>(base);
+          const ServerMetrics& this_ = static_cast<const ServerMetrics&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* Message::_InternalSerialize(
+        ::uint8_t* ServerMetrics::_InternalSerialize(
             ::uint8_t* target,
             ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const Message& this_ = *this;
+          const ServerMetrics& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:mini2.Message)
+          // @@protoc_insertion_point(serialize_to_array_start:mini2.ServerMetrics)
           ::uint32_t cached_has_bits = 0;
           (void)cached_has_bits;
 
-          // string content = 1;
-          if (!this_._internal_content().empty()) {
-            const std::string& _s = this_._internal_content();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.Message.content");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
+          // double cpu_utilization = 1;
+          if (::absl::bit_cast<::uint64_t>(this_._internal_cpu_utilization()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                1, this_._internal_cpu_utilization(), target);
           }
 
-          // string id = 2;
-          if (!this_._internal_id().empty()) {
-            const std::string& _s = this_._internal_id();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.Message.id");
-            target = stream->WriteStringMaybeAliased(2, _s, target);
+          // double memory_usage = 2;
+          if (::absl::bit_cast<::uint64_t>(this_._internal_memory_usage()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                2, this_._internal_memory_usage(), target);
           }
 
-          // int64 timestamp = 3;
-          if (this_._internal_timestamp() != 0) {
+          // double avg_network_latency = 3;
+          if (::absl::bit_cast<::uint64_t>(this_._internal_avg_network_latency()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                3, this_._internal_avg_network_latency(), target);
+          }
+
+          // int32 message_queue_length = 4;
+          if (this_._internal_message_queue_length() != 0) {
             target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt64ToArrayWithField<3>(
-                    stream, this_._internal_timestamp(), target);
+                WriteInt32ToArrayWithField<4>(
+                    stream, this_._internal_message_queue_length(), target);
+          }
+
+          // int32 max_queue_length = 5;
+          if (this_._internal_max_queue_length() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<5>(
+                    stream, this_._internal_max_queue_length(), target);
+          }
+
+          // double avg_message_age = 6;
+          if (::absl::bit_cast<::uint64_t>(this_._internal_avg_message_age()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                6, this_._internal_avg_message_age(), target);
+          }
+
+          // double max_message_age = 7;
+          if (::absl::bit_cast<::uint64_t>(this_._internal_max_message_age()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                7, this_._internal_max_message_age(), target);
+          }
+
+          // double max_acceptable_latency = 8;
+          if (::absl::bit_cast<::uint64_t>(this_._internal_max_acceptable_latency()) != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
+                8, this_._internal_max_acceptable_latency(), target);
+          }
+
+          // int32 hop_distance = 9;
+          if (this_._internal_hop_distance() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<9>(
+                    stream, this_._internal_hop_distance(), target);
           }
 
           if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
@@ -3024,18 +3195,18 @@ PROTOBUF_NOINLINE void Message::Clear() {
                 ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
                     this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
           }
-          // @@protoc_insertion_point(serialize_to_array_end:mini2.Message)
+          // @@protoc_insertion_point(serialize_to_array_end:mini2.ServerMetrics)
           return target;
         }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t Message::ByteSizeLong(const MessageLite& base) {
-          const Message& this_ = static_cast<const Message&>(base);
+        ::size_t ServerMetrics::ByteSizeLong(const MessageLite& base) {
+          const ServerMetrics& this_ = static_cast<const ServerMetrics&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t Message::ByteSizeLong() const {
-          const Message& this_ = *this;
+        ::size_t ServerMetrics::ByteSizeLong() const {
+          const ServerMetrics& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:mini2.Message)
+          // @@protoc_insertion_point(message_byte_size_start:mini2.ServerMetrics)
           ::size_t total_size = 0;
 
           ::uint32_t cached_has_bits = 0;
@@ -3044,65 +3215,1605 @@ PROTOBUF_NOINLINE void Message::Clear() {
 
           ::_pbi::Prefetch5LinesFrom7Lines(&this_);
            {
-            // string content = 1;
-            if (!this_._internal_content().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_content());
+            // double cpu_utilization = 1;
+            if (::absl::bit_cast<::uint64_t>(this_._internal_cpu_utilization()) != 0) {
+              total_size += 9;
             }
-            // string id = 2;
-            if (!this_._internal_id().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_id());
+            // double memory_usage = 2;
+            if (::absl::bit_cast<::uint64_t>(this_._internal_memory_usage()) != 0) {
+              total_size += 9;
             }
-            // int64 timestamp = 3;
-            if (this_._internal_timestamp() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
-                  this_._internal_timestamp());
+            // double avg_network_latency = 3;
+            if (::absl::bit_cast<::uint64_t>(this_._internal_avg_network_latency()) != 0) {
+              total_size += 9;
+            }
+            // int32 message_queue_length = 4;
+            if (this_._internal_message_queue_length() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_message_queue_length());
+            }
+            // int32 max_queue_length = 5;
+            if (this_._internal_max_queue_length() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_max_queue_length());
+            }
+            // double avg_message_age = 6;
+            if (::absl::bit_cast<::uint64_t>(this_._internal_avg_message_age()) != 0) {
+              total_size += 9;
+            }
+            // double max_message_age = 7;
+            if (::absl::bit_cast<::uint64_t>(this_._internal_max_message_age()) != 0) {
+              total_size += 9;
+            }
+            // double max_acceptable_latency = 8;
+            if (::absl::bit_cast<::uint64_t>(this_._internal_max_acceptable_latency()) != 0) {
+              total_size += 9;
+            }
+            // int32 hop_distance = 9;
+            if (this_._internal_hop_distance() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_hop_distance());
             }
           }
           return this_.MaybeComputeUnknownFieldsSize(total_size,
                                                      &this_._impl_._cached_size_);
         }
 
-void Message::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<Message*>(&to_msg);
-  auto& from = static_cast<const Message&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.Message)
+void ServerMetrics::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<ServerMetrics*>(&to_msg);
+  auto& from = static_cast<const ServerMetrics&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.ServerMetrics)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_content().empty()) {
-    _this->_internal_set_content(from._internal_content());
+  if (::absl::bit_cast<::uint64_t>(from._internal_cpu_utilization()) != 0) {
+    _this->_impl_.cpu_utilization_ = from._impl_.cpu_utilization_;
   }
-  if (!from._internal_id().empty()) {
-    _this->_internal_set_id(from._internal_id());
+  if (::absl::bit_cast<::uint64_t>(from._internal_memory_usage()) != 0) {
+    _this->_impl_.memory_usage_ = from._impl_.memory_usage_;
   }
-  if (from._internal_timestamp() != 0) {
-    _this->_impl_.timestamp_ = from._impl_.timestamp_;
+  if (::absl::bit_cast<::uint64_t>(from._internal_avg_network_latency()) != 0) {
+    _this->_impl_.avg_network_latency_ = from._impl_.avg_network_latency_;
+  }
+  if (from._internal_message_queue_length() != 0) {
+    _this->_impl_.message_queue_length_ = from._impl_.message_queue_length_;
+  }
+  if (from._internal_max_queue_length() != 0) {
+    _this->_impl_.max_queue_length_ = from._impl_.max_queue_length_;
+  }
+  if (::absl::bit_cast<::uint64_t>(from._internal_avg_message_age()) != 0) {
+    _this->_impl_.avg_message_age_ = from._impl_.avg_message_age_;
+  }
+  if (::absl::bit_cast<::uint64_t>(from._internal_max_message_age()) != 0) {
+    _this->_impl_.max_message_age_ = from._impl_.max_message_age_;
+  }
+  if (::absl::bit_cast<::uint64_t>(from._internal_max_acceptable_latency()) != 0) {
+    _this->_impl_.max_acceptable_latency_ = from._impl_.max_acceptable_latency_;
+  }
+  if (from._internal_hop_distance() != 0) {
+    _this->_impl_.hop_distance_ = from._impl_.hop_distance_;
   }
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void Message::CopyFrom(const Message& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:mini2.Message)
+void ServerMetrics::CopyFrom(const ServerMetrics& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mini2.ServerMetrics)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void Message::InternalSwap(Message* PROTOBUF_RESTRICT other) {
+void ServerMetrics::InternalSwap(ServerMetrics* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.hop_distance_)
+      + sizeof(ServerMetrics::_impl_.hop_distance_)
+      - PROTOBUF_FIELD_OFFSET(ServerMetrics, _impl_.cpu_utilization_)>(
+          reinterpret_cast<char*>(&_impl_.cpu_utilization_),
+          reinterpret_cast<char*>(&other->_impl_.cpu_utilization_));
+}
+
+::google::protobuf::Metadata ServerMetrics::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class StealRequest::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<StealRequest>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(StealRequest, _impl_._has_bits_);
+};
+
+StealRequest::StealRequest(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:mini2.StealRequest)
+}
+inline PROTOBUF_NDEBUG_INLINE StealRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::mini2::StealRequest& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        requester_id_(arena, from.requester_id_) {}
+
+StealRequest::StealRequest(
+    ::google::protobuf::Arena* arena,
+    const StealRequest& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  StealRequest* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.requester_metrics_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::mini2::ServerMetrics>(
+                              arena, *from._impl_.requester_metrics_)
+                        : nullptr;
+  _impl_.requested_count_ = from._impl_.requested_count_;
+
+  // @@protoc_insertion_point(copy_constructor:mini2.StealRequest)
+}
+inline PROTOBUF_NDEBUG_INLINE StealRequest::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        requester_id_(arena) {}
+
+inline void StealRequest::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, requester_metrics_),
+           0,
+           offsetof(Impl_, requested_count_) -
+               offsetof(Impl_, requester_metrics_) +
+               sizeof(Impl_::requested_count_));
+}
+StealRequest::~StealRequest() {
+  // @@protoc_insertion_point(destructor:mini2.StealRequest)
+  SharedDtor(*this);
+}
+inline void StealRequest::SharedDtor(MessageLite& self) {
+  StealRequest& this_ = static_cast<StealRequest&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.requester_id_.Destroy();
+  delete this_._impl_.requester_metrics_;
+  this_._impl_.~Impl_();
+}
+
+inline void* StealRequest::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) StealRequest(arena);
+}
+constexpr auto StealRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(StealRequest),
+                                            alignof(StealRequest));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull StealRequest::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_StealRequest_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &StealRequest::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<StealRequest>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &StealRequest::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<StealRequest>(), &StealRequest::ByteSizeLong,
+            &StealRequest::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(StealRequest, _impl_._cached_size_),
+        false,
+    },
+    &StealRequest::kDescriptorMethods,
+    &descriptor_table_mini2_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* StealRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 1, 39, 2> StealRequest::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(StealRequest, _impl_._has_bits_),
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::mini2::StealRequest>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // string requester_id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requester_id_)}},
+    // int32 requested_count = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(StealRequest, _impl_.requested_count_), 63>(),
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requested_count_)}},
+    // .mini2.ServerMetrics requester_metrics = 3;
+    {::_pbi::TcParser::FastMtS1,
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requester_metrics_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string requester_id = 1;
+    {PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requester_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 requested_count = 2;
+    {PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requested_count_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .mini2.ServerMetrics requester_metrics = 3;
+    {PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requester_metrics_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::mini2::ServerMetrics>()},
+  }}, {{
+    "\22\14\0\0\0\0\0\0"
+    "mini2.StealRequest"
+    "requester_id"
+  }},
+};
+
+PROTOBUF_NOINLINE void StealRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:mini2.StealRequest)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.requester_id_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.requester_metrics_ != nullptr);
+    _impl_.requester_metrics_->Clear();
+  }
+  _impl_.requested_count_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* StealRequest::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const StealRequest& this_ = static_cast<const StealRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* StealRequest::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const StealRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:mini2.StealRequest)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string requester_id = 1;
+          if (!this_._internal_requester_id().empty()) {
+            const std::string& _s = this_._internal_requester_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.StealRequest.requester_id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // int32 requested_count = 2;
+          if (this_._internal_requested_count() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<2>(
+                    stream, this_._internal_requested_count(), target);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .mini2.ServerMetrics requester_metrics = 3;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                3, *this_._impl_.requester_metrics_, this_._impl_.requester_metrics_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:mini2.StealRequest)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t StealRequest::ByteSizeLong(const MessageLite& base) {
+          const StealRequest& this_ = static_cast<const StealRequest&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t StealRequest::ByteSizeLong() const {
+          const StealRequest& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:mini2.StealRequest)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string requester_id = 1;
+            if (!this_._internal_requester_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_requester_id());
+            }
+          }
+           {
+            // .mini2.ServerMetrics requester_metrics = 3;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.requester_metrics_);
+            }
+          }
+           {
+            // int32 requested_count = 2;
+            if (this_._internal_requested_count() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_requested_count());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void StealRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<StealRequest*>(&to_msg);
+  auto& from = static_cast<const StealRequest&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.StealRequest)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_requester_id().empty()) {
+    _this->_internal_set_requester_id(from._internal_requester_id());
+  }
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.requester_metrics_ != nullptr);
+    if (_this->_impl_.requester_metrics_ == nullptr) {
+      _this->_impl_.requester_metrics_ =
+          ::google::protobuf::Message::CopyConstruct<::mini2::ServerMetrics>(arena, *from._impl_.requester_metrics_);
+    } else {
+      _this->_impl_.requester_metrics_->MergeFrom(*from._impl_.requester_metrics_);
+    }
+  }
+  if (from._internal_requested_count() != 0) {
+    _this->_impl_.requested_count_ = from._impl_.requested_count_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void StealRequest::CopyFrom(const StealRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mini2.StealRequest)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void StealRequest::InternalSwap(StealRequest* PROTOBUF_RESTRICT other) {
   using std::swap;
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.content_, &other->_impl_.content_, arena);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.id_, &other->_impl_.id_, arena);
-        swap(_impl_.timestamp_, other->_impl_.timestamp_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.requester_id_, &other->_impl_.requester_id_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requested_count_)
+      + sizeof(StealRequest::_impl_.requested_count_)
+      - PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requester_metrics_)>(
+          reinterpret_cast<char*>(&_impl_.requester_metrics_),
+          reinterpret_cast<char*>(&other->_impl_.requester_metrics_));
 }
 
-::google::protobuf::Metadata Message::GetMetadata() const {
+::google::protobuf::Metadata StealRequest::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class StealResponse::_Internal {
+ public:
+};
+
+StealResponse::StealResponse(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:mini2.StealResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE StealResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::mini2::StealResponse& from_msg)
+      : stolen_messages_{visibility, arena, from.stolen_messages_},
+        error_message_(arena, from.error_message_),
+        _cached_size_{0} {}
+
+StealResponse::StealResponse(
+    ::google::protobuf::Arena* arena,
+    const StealResponse& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  StealResponse* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.success_ = from._impl_.success_;
+
+  // @@protoc_insertion_point(copy_constructor:mini2.StealResponse)
+}
+inline PROTOBUF_NDEBUG_INLINE StealResponse::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : stolen_messages_{visibility, arena},
+        error_message_(arena),
+        _cached_size_{0} {}
+
+inline void StealResponse::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.success_ = {};
+}
+StealResponse::~StealResponse() {
+  // @@protoc_insertion_point(destructor:mini2.StealResponse)
+  SharedDtor(*this);
+}
+inline void StealResponse::SharedDtor(MessageLite& self) {
+  StealResponse& this_ = static_cast<StealResponse&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.error_message_.Destroy();
+  this_._impl_.~Impl_();
+}
+
+inline void* StealResponse::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) StealResponse(arena);
+}
+constexpr auto StealResponse::InternalNewImpl_() {
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.stolen_messages_) +
+          decltype(StealResponse::_impl_.stolen_messages_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::CopyInit(
+        sizeof(StealResponse), alignof(StealResponse), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&StealResponse::PlacementNew_,
+                                 sizeof(StealResponse),
+                                 alignof(StealResponse));
+  }
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull StealResponse::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_StealResponse_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &StealResponse::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<StealResponse>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &StealResponse::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<StealResponse>(), &StealResponse::ByteSizeLong,
+            &StealResponse::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(StealResponse, _impl_._cached_size_),
+        false,
+    },
+    &StealResponse::kDescriptorMethods,
+    &descriptor_table_mini2_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* StealResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 1, 41, 2> StealResponse::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::mini2::StealResponse>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // bool success = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(StealResponse, _impl_.success_), 63>(),
+     {8, 63, 0, PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.success_)}},
+    // repeated .mini2.CollisionData stolen_messages = 2;
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.stolen_messages_)}},
+    // string error_message = 3;
+    {::_pbi::TcParser::FastUS1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.error_message_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // bool success = 1;
+    {PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.success_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kBool)},
+    // repeated .mini2.CollisionData stolen_messages = 2;
+    {PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.stolen_messages_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // string error_message = 3;
+    {PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.error_message_), 0, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::mini2::CollisionData>()},
+  }}, {{
+    "\23\0\0\15\0\0\0\0"
+    "mini2.StealResponse"
+    "error_message"
+  }},
+};
+
+PROTOBUF_NOINLINE void StealResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:mini2.StealResponse)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.stolen_messages_.Clear();
+  _impl_.error_message_.ClearToEmpty();
+  _impl_.success_ = false;
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* StealResponse::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const StealResponse& this_ = static_cast<const StealResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* StealResponse::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const StealResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:mini2.StealResponse)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // bool success = 1;
+          if (this_._internal_success() != 0) {
+            target = stream->EnsureSpace(target);
+            target = ::_pbi::WireFormatLite::WriteBoolToArray(
+                1, this_._internal_success(), target);
+          }
+
+          // repeated .mini2.CollisionData stolen_messages = 2;
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_stolen_messages_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_stolen_messages().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    2, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          // string error_message = 3;
+          if (!this_._internal_error_message().empty()) {
+            const std::string& _s = this_._internal_error_message();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.StealResponse.error_message");
+            target = stream->WriteStringMaybeAliased(3, _s, target);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:mini2.StealResponse)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t StealResponse::ByteSizeLong(const MessageLite& base) {
+          const StealResponse& this_ = static_cast<const StealResponse&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t StealResponse::ByteSizeLong() const {
+          const StealResponse& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:mini2.StealResponse)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated .mini2.CollisionData stolen_messages = 2;
+            {
+              total_size += 1UL * this_._internal_stolen_messages_size();
+              for (const auto& msg : this_._internal_stolen_messages()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+           {
+            // string error_message = 3;
+            if (!this_._internal_error_message().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_error_message());
+            }
+            // bool success = 1;
+            if (this_._internal_success() != 0) {
+              total_size += 2;
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void StealResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<StealResponse*>(&to_msg);
+  auto& from = static_cast<const StealResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.StealResponse)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_stolen_messages()->MergeFrom(
+      from._internal_stolen_messages());
+  if (!from._internal_error_message().empty()) {
+    _this->_internal_set_error_message(from._internal_error_message());
+  }
+  if (from._internal_success() != 0) {
+    _this->_impl_.success_ = from._impl_.success_;
+  }
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void StealResponse::CopyFrom(const StealResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mini2.StealResponse)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void StealResponse::InternalSwap(StealResponse* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.stolen_messages_.InternalSwap(&other->_impl_.stolen_messages_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.error_message_, &other->_impl_.error_message_, arena);
+        swap(_impl_.success_, other->_impl_.success_);
+}
+
+::google::protobuf::Metadata StealResponse::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class ServerInfo::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<ServerInfo>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_._has_bits_);
+};
+
+ServerInfo::ServerInfo(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:mini2.ServerInfo)
+}
+inline PROTOBUF_NDEBUG_INLINE ServerInfo::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::mini2::ServerInfo& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        server_id_(arena, from.server_id_),
+        address_(arena, from.address_) {}
+
+ServerInfo::ServerInfo(
+    ::google::protobuf::Arena* arena,
+    const ServerInfo& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  ServerInfo* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.metrics_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::mini2::ServerMetrics>(
+                              arena, *from._impl_.metrics_)
+                        : nullptr;
+  _impl_.port_ = from._impl_.port_;
+
+  // @@protoc_insertion_point(copy_constructor:mini2.ServerInfo)
+}
+inline PROTOBUF_NDEBUG_INLINE ServerInfo::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        server_id_(arena),
+        address_(arena) {}
+
+inline void ServerInfo::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, metrics_),
+           0,
+           offsetof(Impl_, port_) -
+               offsetof(Impl_, metrics_) +
+               sizeof(Impl_::port_));
+}
+ServerInfo::~ServerInfo() {
+  // @@protoc_insertion_point(destructor:mini2.ServerInfo)
+  SharedDtor(*this);
+}
+inline void ServerInfo::SharedDtor(MessageLite& self) {
+  ServerInfo& this_ = static_cast<ServerInfo&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.server_id_.Destroy();
+  this_._impl_.address_.Destroy();
+  delete this_._impl_.metrics_;
+  this_._impl_.~Impl_();
+}
+
+inline void* ServerInfo::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) ServerInfo(arena);
+}
+constexpr auto ServerInfo::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(ServerInfo),
+                                            alignof(ServerInfo));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull ServerInfo::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_ServerInfo_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &ServerInfo::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<ServerInfo>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &ServerInfo::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<ServerInfo>(), &ServerInfo::ByteSizeLong,
+            &ServerInfo::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_._cached_size_),
+        false,
+    },
+    &ServerInfo::kDescriptorMethods,
+    &descriptor_table_mini2_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* ServerInfo::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 1, 41, 2> ServerInfo::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_._has_bits_),
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::mini2::ServerInfo>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .mini2.ServerMetrics metrics = 4;
+    {::_pbi::TcParser::FastMtS1,
+     {34, 0, 0, PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.metrics_)}},
+    // string server_id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.server_id_)}},
+    // string address = 2;
+    {::_pbi::TcParser::FastUS1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.address_)}},
+    // int32 port = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(ServerInfo, _impl_.port_), 63>(),
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.port_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string server_id = 1;
+    {PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.server_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // string address = 2;
+    {PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.address_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // int32 port = 3;
+    {PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.port_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
+    // .mini2.ServerMetrics metrics = 4;
+    {PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.metrics_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::mini2::ServerMetrics>()},
+  }}, {{
+    "\20\11\7\0\0\0\0\0"
+    "mini2.ServerInfo"
+    "server_id"
+    "address"
+  }},
+};
+
+PROTOBUF_NOINLINE void ServerInfo::Clear() {
+// @@protoc_insertion_point(message_clear_start:mini2.ServerInfo)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.server_id_.ClearToEmpty();
+  _impl_.address_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.metrics_ != nullptr);
+    _impl_.metrics_->Clear();
+  }
+  _impl_.port_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* ServerInfo::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const ServerInfo& this_ = static_cast<const ServerInfo&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* ServerInfo::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const ServerInfo& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:mini2.ServerInfo)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string server_id = 1;
+          if (!this_._internal_server_id().empty()) {
+            const std::string& _s = this_._internal_server_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.ServerInfo.server_id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          // string address = 2;
+          if (!this_._internal_address().empty()) {
+            const std::string& _s = this_._internal_address();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.ServerInfo.address");
+            target = stream->WriteStringMaybeAliased(2, _s, target);
+          }
+
+          // int32 port = 3;
+          if (this_._internal_port() != 0) {
+            target = ::google::protobuf::internal::WireFormatLite::
+                WriteInt32ToArrayWithField<3>(
+                    stream, this_._internal_port(), target);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .mini2.ServerMetrics metrics = 4;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                4, *this_._impl_.metrics_, this_._impl_.metrics_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:mini2.ServerInfo)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t ServerInfo::ByteSizeLong(const MessageLite& base) {
+          const ServerInfo& this_ = static_cast<const ServerInfo&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t ServerInfo::ByteSizeLong() const {
+          const ServerInfo& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:mini2.ServerInfo)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string server_id = 1;
+            if (!this_._internal_server_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_server_id());
+            }
+            // string address = 2;
+            if (!this_._internal_address().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_address());
+            }
+          }
+           {
+            // .mini2.ServerMetrics metrics = 4;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.metrics_);
+            }
+          }
+           {
+            // int32 port = 3;
+            if (this_._internal_port() != 0) {
+              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+                  this_._internal_port());
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void ServerInfo::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<ServerInfo*>(&to_msg);
+  auto& from = static_cast<const ServerInfo&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.ServerInfo)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_server_id().empty()) {
+    _this->_internal_set_server_id(from._internal_server_id());
+  }
+  if (!from._internal_address().empty()) {
+    _this->_internal_set_address(from._internal_address());
+  }
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.metrics_ != nullptr);
+    if (_this->_impl_.metrics_ == nullptr) {
+      _this->_impl_.metrics_ =
+          ::google::protobuf::Message::CopyConstruct<::mini2::ServerMetrics>(arena, *from._impl_.metrics_);
+    } else {
+      _this->_impl_.metrics_->MergeFrom(*from._impl_.metrics_);
+    }
+  }
+  if (from._internal_port() != 0) {
+    _this->_impl_.port_ = from._impl_.port_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ServerInfo::CopyFrom(const ServerInfo& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mini2.ServerInfo)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void ServerInfo::InternalSwap(ServerInfo* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.server_id_, &other->_impl_.server_id_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.address_, &other->_impl_.address_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.port_)
+      + sizeof(ServerInfo::_impl_.port_)
+      - PROTOBUF_FIELD_OFFSET(ServerInfo, _impl_.metrics_)>(
+          reinterpret_cast<char*>(&_impl_.metrics_),
+          reinterpret_cast<char*>(&other->_impl_.metrics_));
+}
+
+::google::protobuf::Metadata ServerInfo::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class ServerList::_Internal {
+ public:
+};
+
+ServerList::ServerList(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:mini2.ServerList)
+}
+inline PROTOBUF_NDEBUG_INLINE ServerList::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::mini2::ServerList& from_msg)
+      : servers_{visibility, arena, from.servers_},
+        _cached_size_{0} {}
+
+ServerList::ServerList(
+    ::google::protobuf::Arena* arena,
+    const ServerList& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  ServerList* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+
+  // @@protoc_insertion_point(copy_constructor:mini2.ServerList)
+}
+inline PROTOBUF_NDEBUG_INLINE ServerList::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : servers_{visibility, arena},
+        _cached_size_{0} {}
+
+inline void ServerList::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+}
+ServerList::~ServerList() {
+  // @@protoc_insertion_point(destructor:mini2.ServerList)
+  SharedDtor(*this);
+}
+inline void ServerList::SharedDtor(MessageLite& self) {
+  ServerList& this_ = static_cast<ServerList&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+inline void* ServerList::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) ServerList(arena);
+}
+constexpr auto ServerList::InternalNewImpl_() {
+  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
+      PROTOBUF_FIELD_OFFSET(ServerList, _impl_.servers_) +
+          decltype(ServerList::_impl_.servers_)::
+              InternalGetArenaOffset(
+                  ::google::protobuf::Message::internal_visibility()),
+  });
+  if (arena_bits.has_value()) {
+    return ::google::protobuf::internal::MessageCreator::ZeroInit(
+        sizeof(ServerList), alignof(ServerList), *arena_bits);
+  } else {
+    return ::google::protobuf::internal::MessageCreator(&ServerList::PlacementNew_,
+                                 sizeof(ServerList),
+                                 alignof(ServerList));
+  }
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull ServerList::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_ServerList_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &ServerList::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<ServerList>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &ServerList::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<ServerList>(), &ServerList::ByteSizeLong,
+            &ServerList::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(ServerList, _impl_._cached_size_),
+        false,
+    },
+    &ServerList::kDescriptorMethods,
+    &descriptor_table_mini2_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* ServerList::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<0, 1, 1, 0, 2> ServerList::_table_ = {
+  {
+    0,  // no _has_bits_
+    0, // no _extensions_
+    1, 0,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967294,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    1,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::mini2::ServerList>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // repeated .mini2.ServerInfo servers = 1;
+    {::_pbi::TcParser::FastMtR1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(ServerList, _impl_.servers_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // repeated .mini2.ServerInfo servers = 1;
+    {PROTOBUF_FIELD_OFFSET(ServerList, _impl_.servers_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::mini2::ServerInfo>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void ServerList::Clear() {
+// @@protoc_insertion_point(message_clear_start:mini2.ServerList)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.servers_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* ServerList::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const ServerList& this_ = static_cast<const ServerList&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* ServerList::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const ServerList& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:mini2.ServerList)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // repeated .mini2.ServerInfo servers = 1;
+          for (unsigned i = 0, n = static_cast<unsigned>(
+                                   this_._internal_servers_size());
+               i < n; i++) {
+            const auto& repfield = this_._internal_servers().Get(i);
+            target =
+                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                    1, repfield, repfield.GetCachedSize(),
+                    target, stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:mini2.ServerList)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t ServerList::ByteSizeLong(const MessageLite& base) {
+          const ServerList& this_ = static_cast<const ServerList&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t ServerList::ByteSizeLong() const {
+          const ServerList& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:mini2.ServerList)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // repeated .mini2.ServerInfo servers = 1;
+            {
+              total_size += 1UL * this_._internal_servers_size();
+              for (const auto& msg : this_._internal_servers()) {
+                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+              }
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void ServerList::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<ServerList*>(&to_msg);
+  auto& from = static_cast<const ServerList&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.ServerList)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_servers()->MergeFrom(
+      from._internal_servers());
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void ServerList::CopyFrom(const ServerList& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mini2.ServerList)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void ServerList::InternalSwap(ServerList* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  _impl_.servers_.InternalSwap(&other->_impl_.servers_);
+}
+
+::google::protobuf::Metadata ServerList::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class MetricsUpdate::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<MetricsUpdate>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_._has_bits_);
+};
+
+MetricsUpdate::MetricsUpdate(::google::protobuf::Arena* arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:mini2.MetricsUpdate)
+}
+inline PROTOBUF_NDEBUG_INLINE MetricsUpdate::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::mini2::MetricsUpdate& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        server_id_(arena, from.server_id_) {}
+
+MetricsUpdate::MetricsUpdate(
+    ::google::protobuf::Arena* arena,
+    const MetricsUpdate& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : ::google::protobuf::Message(arena, _class_data_.base()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : ::google::protobuf::Message(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  MetricsUpdate* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.metrics_ = (cached_has_bits & 0x00000001u) ? ::google::protobuf::Message::CopyConstruct<::mini2::ServerMetrics>(
+                              arena, *from._impl_.metrics_)
+                        : nullptr;
+
+  // @@protoc_insertion_point(copy_constructor:mini2.MetricsUpdate)
+}
+inline PROTOBUF_NDEBUG_INLINE MetricsUpdate::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        server_id_(arena) {}
+
+inline void MetricsUpdate::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.metrics_ = {};
+}
+MetricsUpdate::~MetricsUpdate() {
+  // @@protoc_insertion_point(destructor:mini2.MetricsUpdate)
+  SharedDtor(*this);
+}
+inline void MetricsUpdate::SharedDtor(MessageLite& self) {
+  MetricsUpdate& this_ = static_cast<MetricsUpdate&>(self);
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.server_id_.Destroy();
+  delete this_._impl_.metrics_;
+  this_._impl_.~Impl_();
+}
+
+inline void* MetricsUpdate::PlacementNew_(const void*, void* mem,
+                                        ::google::protobuf::Arena* arena) {
+  return ::new (mem) MetricsUpdate(arena);
+}
+constexpr auto MetricsUpdate::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(MetricsUpdate),
+                                            alignof(MetricsUpdate));
+}
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::google::protobuf::internal::ClassDataFull MetricsUpdate::_class_data_ = {
+    ::google::protobuf::internal::ClassData{
+        &_MetricsUpdate_default_instance_._instance,
+        &_table_.header,
+        nullptr,  // OnDemandRegisterArenaDtor
+        nullptr,  // IsInitialized
+        &MetricsUpdate::MergeImpl,
+        ::google::protobuf::Message::GetNewImpl<MetricsUpdate>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        &MetricsUpdate::SharedDtor,
+        ::google::protobuf::Message::GetClearImpl<MetricsUpdate>(), &MetricsUpdate::ByteSizeLong,
+            &MetricsUpdate::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+        PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_._cached_size_),
+        false,
+    },
+    &MetricsUpdate::kDescriptorMethods,
+    &descriptor_table_mini2_2eproto,
+    nullptr,  // tracker
+};
+const ::google::protobuf::internal::ClassData* MetricsUpdate::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
+  return _class_data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 1, 37, 2> MetricsUpdate::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    _class_data_.base(),
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::mini2::MetricsUpdate>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // .mini2.ServerMetrics metrics = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.metrics_)}},
+    // string server_id = 1;
+    {::_pbi::TcParser::FastUS1,
+     {10, 63, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.server_id_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // string server_id = 1;
+    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.server_id_), -1, 0,
+    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
+    // .mini2.ServerMetrics metrics = 2;
+    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.metrics_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::mini2::ServerMetrics>()},
+  }}, {{
+    "\23\11\0\0\0\0\0\0"
+    "mini2.MetricsUpdate"
+    "server_id"
+  }},
+};
+
+PROTOBUF_NOINLINE void MetricsUpdate::Clear() {
+// @@protoc_insertion_point(message_clear_start:mini2.MetricsUpdate)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.server_id_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.metrics_ != nullptr);
+    _impl_.metrics_->Clear();
+  }
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::uint8_t* MetricsUpdate::_InternalSerialize(
+            const MessageLite& base, ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) {
+          const MetricsUpdate& this_ = static_cast<const MetricsUpdate&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::uint8_t* MetricsUpdate::_InternalSerialize(
+            ::uint8_t* target,
+            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+          const MetricsUpdate& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(serialize_to_array_start:mini2.MetricsUpdate)
+          ::uint32_t cached_has_bits = 0;
+          (void)cached_has_bits;
+
+          // string server_id = 1;
+          if (!this_._internal_server_id().empty()) {
+            const std::string& _s = this_._internal_server_id();
+            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.MetricsUpdate.server_id");
+            target = stream->WriteStringMaybeAliased(1, _s, target);
+          }
+
+          cached_has_bits = this_._impl_._has_bits_[0];
+          // .mini2.ServerMetrics metrics = 2;
+          if (cached_has_bits & 0x00000001u) {
+            target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+                2, *this_._impl_.metrics_, this_._impl_.metrics_->GetCachedSize(), target,
+                stream);
+          }
+
+          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+            target =
+                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+          }
+          // @@protoc_insertion_point(serialize_to_array_end:mini2.MetricsUpdate)
+          return target;
+        }
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+        ::size_t MetricsUpdate::ByteSizeLong(const MessageLite& base) {
+          const MetricsUpdate& this_ = static_cast<const MetricsUpdate&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+        ::size_t MetricsUpdate::ByteSizeLong() const {
+          const MetricsUpdate& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          // @@protoc_insertion_point(message_byte_size_start:mini2.MetricsUpdate)
+          ::size_t total_size = 0;
+
+          ::uint32_t cached_has_bits = 0;
+          // Prevent compiler warnings about cached_has_bits being unused
+          (void)cached_has_bits;
+
+          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
+           {
+            // string server_id = 1;
+            if (!this_._internal_server_id().empty()) {
+              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                              this_._internal_server_id());
+            }
+          }
+           {
+            // .mini2.ServerMetrics metrics = 2;
+            cached_has_bits = this_._impl_._has_bits_[0];
+            if (cached_has_bits & 0x00000001u) {
+              total_size += 1 +
+                            ::google::protobuf::internal::WireFormatLite::MessageSize(*this_._impl_.metrics_);
+            }
+          }
+          return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                                     &this_._impl_._cached_size_);
+        }
+
+void MetricsUpdate::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<MetricsUpdate*>(&to_msg);
+  auto& from = static_cast<const MetricsUpdate&>(from_msg);
+  ::google::protobuf::Arena* arena = _this->GetArena();
+  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.MetricsUpdate)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (!from._internal_server_id().empty()) {
+    _this->_internal_set_server_id(from._internal_server_id());
+  }
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(from._impl_.metrics_ != nullptr);
+    if (_this->_impl_.metrics_ == nullptr) {
+      _this->_impl_.metrics_ =
+          ::google::protobuf::Message::CopyConstruct<::mini2::ServerMetrics>(arena, *from._impl_.metrics_);
+    } else {
+      _this->_impl_.metrics_->MergeFrom(*from._impl_.metrics_);
+    }
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void MetricsUpdate::CopyFrom(const MetricsUpdate& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:mini2.MetricsUpdate)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void MetricsUpdate::InternalSwap(MetricsUpdate* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.server_id_, &other->_impl_.server_id_, arena);
+  swap(_impl_.metrics_, other->_impl_.metrics_);
+}
+
+::google::protobuf::Metadata MetricsUpdate::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
@@ -3359,843 +5070,6 @@ void MetricsResponse::InternalSwap(MetricsResponse* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata MetricsResponse::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class StealRequest::_Internal {
- public:
-};
-
-StealRequest::StealRequest(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:mini2.StealRequest)
-}
-inline PROTOBUF_NDEBUG_INLINE StealRequest::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::mini2::StealRequest& from_msg)
-      : source_server_(arena, from.source_server_),
-        _cached_size_{0} {}
-
-StealRequest::StealRequest(
-    ::google::protobuf::Arena* arena,
-    const StealRequest& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  StealRequest* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  _impl_.requested_items_ = from._impl_.requested_items_;
-
-  // @@protoc_insertion_point(copy_constructor:mini2.StealRequest)
-}
-inline PROTOBUF_NDEBUG_INLINE StealRequest::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : source_server_(arena),
-        _cached_size_{0} {}
-
-inline void StealRequest::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.requested_items_ = {};
-}
-StealRequest::~StealRequest() {
-  // @@protoc_insertion_point(destructor:mini2.StealRequest)
-  SharedDtor(*this);
-}
-inline void StealRequest::SharedDtor(MessageLite& self) {
-  StealRequest& this_ = static_cast<StealRequest&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.source_server_.Destroy();
-  this_._impl_.~Impl_();
-}
-
-inline void* StealRequest::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) StealRequest(arena);
-}
-constexpr auto StealRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(StealRequest),
-                                            alignof(StealRequest));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull StealRequest::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_StealRequest_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &StealRequest::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<StealRequest>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &StealRequest::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<StealRequest>(), &StealRequest::ByteSizeLong,
-            &StealRequest::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(StealRequest, _impl_._cached_size_),
-        false,
-    },
-    &StealRequest::kDescriptorMethods,
-    &descriptor_table_mini2_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* StealRequest::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 40, 2> StealRequest::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::mini2::StealRequest>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // int32 requested_items = 2;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(StealRequest, _impl_.requested_items_), 63>(),
-     {16, 63, 0, PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requested_items_)}},
-    // string source_server = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.source_server_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // string source_server = 1;
-    {PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.source_server_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // int32 requested_items = 2;
-    {PROTOBUF_FIELD_OFFSET(StealRequest, _impl_.requested_items_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-  }},
-  // no aux_entries
-  {{
-    "\22\15\0\0\0\0\0\0"
-    "mini2.StealRequest"
-    "source_server"
-  }},
-};
-
-PROTOBUF_NOINLINE void StealRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:mini2.StealRequest)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.source_server_.ClearToEmpty();
-  _impl_.requested_items_ = 0;
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* StealRequest::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const StealRequest& this_ = static_cast<const StealRequest&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* StealRequest::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const StealRequest& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:mini2.StealRequest)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // string source_server = 1;
-          if (!this_._internal_source_server().empty()) {
-            const std::string& _s = this_._internal_source_server();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.StealRequest.source_server");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // int32 requested_items = 2;
-          if (this_._internal_requested_items() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<2>(
-                    stream, this_._internal_requested_items(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:mini2.StealRequest)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t StealRequest::ByteSizeLong(const MessageLite& base) {
-          const StealRequest& this_ = static_cast<const StealRequest&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t StealRequest::ByteSizeLong() const {
-          const StealRequest& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:mini2.StealRequest)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // string source_server = 1;
-            if (!this_._internal_source_server().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_source_server());
-            }
-            // int32 requested_items = 2;
-            if (this_._internal_requested_items() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_requested_items());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void StealRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<StealRequest*>(&to_msg);
-  auto& from = static_cast<const StealRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.StealRequest)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_source_server().empty()) {
-    _this->_internal_set_source_server(from._internal_source_server());
-  }
-  if (from._internal_requested_items() != 0) {
-    _this->_impl_.requested_items_ = from._impl_.requested_items_;
-  }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void StealRequest::CopyFrom(const StealRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:mini2.StealRequest)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void StealRequest::InternalSwap(StealRequest* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.source_server_, &other->_impl_.source_server_, arena);
-        swap(_impl_.requested_items_, other->_impl_.requested_items_);
-}
-
-::google::protobuf::Metadata StealRequest::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class StealResponse::_Internal {
- public:
-};
-
-StealResponse::StealResponse(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:mini2.StealResponse)
-}
-inline PROTOBUF_NDEBUG_INLINE StealResponse::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::mini2::StealResponse& from_msg)
-      : stolen_messages_{visibility, arena, from.stolen_messages_},
-        _cached_size_{0} {}
-
-StealResponse::StealResponse(
-    ::google::protobuf::Arena* arena,
-    const StealResponse& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  StealResponse* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-
-  // @@protoc_insertion_point(copy_constructor:mini2.StealResponse)
-}
-inline PROTOBUF_NDEBUG_INLINE StealResponse::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : stolen_messages_{visibility, arena},
-        _cached_size_{0} {}
-
-inline void StealResponse::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-}
-StealResponse::~StealResponse() {
-  // @@protoc_insertion_point(destructor:mini2.StealResponse)
-  SharedDtor(*this);
-}
-inline void StealResponse::SharedDtor(MessageLite& self) {
-  StealResponse& this_ = static_cast<StealResponse&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
-}
-
-inline void* StealResponse::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) StealResponse(arena);
-}
-constexpr auto StealResponse::InternalNewImpl_() {
-  constexpr auto arena_bits = ::google::protobuf::internal::EncodePlacementArenaOffsets({
-      PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.stolen_messages_) +
-          decltype(StealResponse::_impl_.stolen_messages_)::
-              InternalGetArenaOffset(
-                  ::google::protobuf::Message::internal_visibility()),
-  });
-  if (arena_bits.has_value()) {
-    return ::google::protobuf::internal::MessageCreator::ZeroInit(
-        sizeof(StealResponse), alignof(StealResponse), *arena_bits);
-  } else {
-    return ::google::protobuf::internal::MessageCreator(&StealResponse::PlacementNew_,
-                                 sizeof(StealResponse),
-                                 alignof(StealResponse));
-  }
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull StealResponse::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_StealResponse_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &StealResponse::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<StealResponse>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &StealResponse::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<StealResponse>(), &StealResponse::ByteSizeLong,
-            &StealResponse::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(StealResponse, _impl_._cached_size_),
-        false,
-    },
-    &StealResponse::kDescriptorMethods,
-    &descriptor_table_mini2_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* StealResponse::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 1, 0, 2> StealResponse::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
-    1,  // num_aux_entries
-    offsetof(decltype(_table_), aux_entries),
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::mini2::StealResponse>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    // repeated .mini2.Message stolen_messages = 1;
-    {::_pbi::TcParser::FastMtR1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.stolen_messages_)}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // repeated .mini2.Message stolen_messages = 1;
-    {PROTOBUF_FIELD_OFFSET(StealResponse, _impl_.stolen_messages_), 0, 0,
-    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-  }}, {{
-    {::_pbi::TcParser::GetTable<::mini2::Message>()},
-  }}, {{
-  }},
-};
-
-PROTOBUF_NOINLINE void StealResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:mini2.StealResponse)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.stolen_messages_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* StealResponse::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const StealResponse& this_ = static_cast<const StealResponse&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* StealResponse::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const StealResponse& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:mini2.StealResponse)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // repeated .mini2.Message stolen_messages = 1;
-          for (unsigned i = 0, n = static_cast<unsigned>(
-                                   this_._internal_stolen_messages_size());
-               i < n; i++) {
-            const auto& repfield = this_._internal_stolen_messages().Get(i);
-            target =
-                ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
-                    1, repfield, repfield.GetCachedSize(),
-                    target, stream);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:mini2.StealResponse)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t StealResponse::ByteSizeLong(const MessageLite& base) {
-          const StealResponse& this_ = static_cast<const StealResponse&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t StealResponse::ByteSizeLong() const {
-          const StealResponse& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:mini2.StealResponse)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // repeated .mini2.Message stolen_messages = 1;
-            {
-              total_size += 1UL * this_._internal_stolen_messages_size();
-              for (const auto& msg : this_._internal_stolen_messages()) {
-                total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
-              }
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void StealResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<StealResponse*>(&to_msg);
-  auto& from = static_cast<const StealResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.StealResponse)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  _this->_internal_mutable_stolen_messages()->MergeFrom(
-      from._internal_stolen_messages());
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void StealResponse::CopyFrom(const StealResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:mini2.StealResponse)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void StealResponse::InternalSwap(StealResponse* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.stolen_messages_.InternalSwap(&other->_impl_.stolen_messages_);
-}
-
-::google::protobuf::Metadata StealResponse::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
-}
-// ===================================================================
-
-class MetricsUpdate::_Internal {
- public:
-};
-
-MetricsUpdate::MetricsUpdate(::google::protobuf::Arena* arena)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:mini2.MetricsUpdate)
-}
-inline PROTOBUF_NDEBUG_INLINE MetricsUpdate::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
-    const Impl_& from, const ::mini2::MetricsUpdate& from_msg)
-      : server_id_(arena, from.server_id_),
-        _cached_size_{0} {}
-
-MetricsUpdate::MetricsUpdate(
-    ::google::protobuf::Arena* arena,
-    const MetricsUpdate& from)
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, _class_data_.base()) {
-#else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  MetricsUpdate* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
-      from._internal_metadata_);
-  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
-  ::memcpy(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, cpu_load_),
-           reinterpret_cast<const char *>(&from._impl_) +
-               offsetof(Impl_, cpu_load_),
-           offsetof(Impl_, queue_size_) -
-               offsetof(Impl_, cpu_load_) +
-               sizeof(Impl_::queue_size_));
-
-  // @@protoc_insertion_point(copy_constructor:mini2.MetricsUpdate)
-}
-inline PROTOBUF_NDEBUG_INLINE MetricsUpdate::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* arena)
-      : server_id_(arena),
-        _cached_size_{0} {}
-
-inline void MetricsUpdate::SharedCtor(::_pb::Arena* arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  ::memset(reinterpret_cast<char *>(&_impl_) +
-               offsetof(Impl_, cpu_load_),
-           0,
-           offsetof(Impl_, queue_size_) -
-               offsetof(Impl_, cpu_load_) +
-               sizeof(Impl_::queue_size_));
-}
-MetricsUpdate::~MetricsUpdate() {
-  // @@protoc_insertion_point(destructor:mini2.MetricsUpdate)
-  SharedDtor(*this);
-}
-inline void MetricsUpdate::SharedDtor(MessageLite& self) {
-  MetricsUpdate& this_ = static_cast<MetricsUpdate&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.server_id_.Destroy();
-  this_._impl_.~Impl_();
-}
-
-inline void* MetricsUpdate::PlacementNew_(const void*, void* mem,
-                                        ::google::protobuf::Arena* arena) {
-  return ::new (mem) MetricsUpdate(arena);
-}
-constexpr auto MetricsUpdate::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(MetricsUpdate),
-                                            alignof(MetricsUpdate));
-}
-PROTOBUF_CONSTINIT
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::google::protobuf::internal::ClassDataFull MetricsUpdate::_class_data_ = {
-    ::google::protobuf::internal::ClassData{
-        &_MetricsUpdate_default_instance_._instance,
-        &_table_.header,
-        nullptr,  // OnDemandRegisterArenaDtor
-        nullptr,  // IsInitialized
-        &MetricsUpdate::MergeImpl,
-        ::google::protobuf::Message::GetNewImpl<MetricsUpdate>(),
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        &MetricsUpdate::SharedDtor,
-        ::google::protobuf::Message::GetClearImpl<MetricsUpdate>(), &MetricsUpdate::ByteSizeLong,
-            &MetricsUpdate::_InternalSerialize,
-#endif  // PROTOBUF_CUSTOM_VTABLE
-        PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_._cached_size_),
-        false,
-    },
-    &MetricsUpdate::kDescriptorMethods,
-    &descriptor_table_mini2_2eproto,
-    nullptr,  // tracker
-};
-const ::google::protobuf::internal::ClassData* MetricsUpdate::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(_class_data_.tc_table);
-  return _class_data_.base();
-}
-PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<3, 5, 0, 37, 2> MetricsUpdate::_table_ = {
-  {
-    0,  // no _has_bits_
-    0, // no _extensions_
-    5, 56,  // max_field_number, fast_idx_mask
-    offsetof(decltype(_table_), field_lookup_table),
-    4294967264,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    5,  // num_field_entries
-    0,  // num_aux_entries
-    offsetof(decltype(_table_), field_names),  // no aux_entries
-    _class_data_.base(),
-    nullptr,  // post_loop_handler
-    ::_pbi::TcParser::GenericFallback,  // fallback
-    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::mini2::MetricsUpdate>(),  // to_prefetch
-    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
-  }, {{
-    {::_pbi::TcParser::MiniParse, {}},
-    // string server_id = 1;
-    {::_pbi::TcParser::FastUS1,
-     {10, 63, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.server_id_)}},
-    // double cpu_load = 2;
-    {::_pbi::TcParser::FastF64S1,
-     {17, 63, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.cpu_load_)}},
-    // int32 queue_size = 3;
-    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MetricsUpdate, _impl_.queue_size_), 63>(),
-     {24, 63, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.queue_size_)}},
-    // double memory_usage = 4;
-    {::_pbi::TcParser::FastF64S1,
-     {33, 63, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.memory_usage_)}},
-    // double network_latency = 5;
-    {::_pbi::TcParser::FastF64S1,
-     {41, 63, 0, PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.network_latency_)}},
-    {::_pbi::TcParser::MiniParse, {}},
-    {::_pbi::TcParser::MiniParse, {}},
-  }}, {{
-    65535, 65535
-  }}, {{
-    // string server_id = 1;
-    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.server_id_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kUtf8String | ::_fl::kRepAString)},
-    // double cpu_load = 2;
-    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.cpu_load_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
-    // int32 queue_size = 3;
-    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.queue_size_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // double memory_usage = 4;
-    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.memory_usage_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
-    // double network_latency = 5;
-    {PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.network_latency_), 0, 0,
-    (0 | ::_fl::kFcSingular | ::_fl::kDouble)},
-  }},
-  // no aux_entries
-  {{
-    "\23\11\0\0\0\0\0\0"
-    "mini2.MetricsUpdate"
-    "server_id"
-  }},
-};
-
-PROTOBUF_NOINLINE void MetricsUpdate::Clear() {
-// @@protoc_insertion_point(message_clear_start:mini2.MetricsUpdate)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.server_id_.ClearToEmpty();
-  ::memset(&_impl_.cpu_load_, 0, static_cast<::size_t>(
-      reinterpret_cast<char*>(&_impl_.queue_size_) -
-      reinterpret_cast<char*>(&_impl_.cpu_load_)) + sizeof(_impl_.queue_size_));
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::uint8_t* MetricsUpdate::_InternalSerialize(
-            const MessageLite& base, ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) {
-          const MetricsUpdate& this_ = static_cast<const MetricsUpdate&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::uint8_t* MetricsUpdate::_InternalSerialize(
-            ::uint8_t* target,
-            ::google::protobuf::io::EpsCopyOutputStream* stream) const {
-          const MetricsUpdate& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(serialize_to_array_start:mini2.MetricsUpdate)
-          ::uint32_t cached_has_bits = 0;
-          (void)cached_has_bits;
-
-          // string server_id = 1;
-          if (!this_._internal_server_id().empty()) {
-            const std::string& _s = this_._internal_server_id();
-            ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-                _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "mini2.MetricsUpdate.server_id");
-            target = stream->WriteStringMaybeAliased(1, _s, target);
-          }
-
-          // double cpu_load = 2;
-          if (::absl::bit_cast<::uint64_t>(this_._internal_cpu_load()) != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
-                2, this_._internal_cpu_load(), target);
-          }
-
-          // int32 queue_size = 3;
-          if (this_._internal_queue_size() != 0) {
-            target = ::google::protobuf::internal::WireFormatLite::
-                WriteInt32ToArrayWithField<3>(
-                    stream, this_._internal_queue_size(), target);
-          }
-
-          // double memory_usage = 4;
-          if (::absl::bit_cast<::uint64_t>(this_._internal_memory_usage()) != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
-                4, this_._internal_memory_usage(), target);
-          }
-
-          // double network_latency = 5;
-          if (::absl::bit_cast<::uint64_t>(this_._internal_network_latency()) != 0) {
-            target = stream->EnsureSpace(target);
-            target = ::_pbi::WireFormatLite::WriteDoubleToArray(
-                5, this_._internal_network_latency(), target);
-          }
-
-          if (PROTOBUF_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-            target =
-                ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-                    this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-          }
-          // @@protoc_insertion_point(serialize_to_array_end:mini2.MetricsUpdate)
-          return target;
-        }
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-        ::size_t MetricsUpdate::ByteSizeLong(const MessageLite& base) {
-          const MetricsUpdate& this_ = static_cast<const MetricsUpdate&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-        ::size_t MetricsUpdate::ByteSizeLong() const {
-          const MetricsUpdate& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-          // @@protoc_insertion_point(message_byte_size_start:mini2.MetricsUpdate)
-          ::size_t total_size = 0;
-
-          ::uint32_t cached_has_bits = 0;
-          // Prevent compiler warnings about cached_has_bits being unused
-          (void)cached_has_bits;
-
-          ::_pbi::Prefetch5LinesFrom7Lines(&this_);
-           {
-            // string server_id = 1;
-            if (!this_._internal_server_id().empty()) {
-              total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
-                                              this_._internal_server_id());
-            }
-            // double cpu_load = 2;
-            if (::absl::bit_cast<::uint64_t>(this_._internal_cpu_load()) != 0) {
-              total_size += 9;
-            }
-            // double memory_usage = 4;
-            if (::absl::bit_cast<::uint64_t>(this_._internal_memory_usage()) != 0) {
-              total_size += 9;
-            }
-            // double network_latency = 5;
-            if (::absl::bit_cast<::uint64_t>(this_._internal_network_latency()) != 0) {
-              total_size += 9;
-            }
-            // int32 queue_size = 3;
-            if (this_._internal_queue_size() != 0) {
-              total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
-                  this_._internal_queue_size());
-            }
-          }
-          return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                                     &this_._impl_._cached_size_);
-        }
-
-void MetricsUpdate::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<MetricsUpdate*>(&to_msg);
-  auto& from = static_cast<const MetricsUpdate&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:mini2.MetricsUpdate)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  if (!from._internal_server_id().empty()) {
-    _this->_internal_set_server_id(from._internal_server_id());
-  }
-  if (::absl::bit_cast<::uint64_t>(from._internal_cpu_load()) != 0) {
-    _this->_impl_.cpu_load_ = from._impl_.cpu_load_;
-  }
-  if (::absl::bit_cast<::uint64_t>(from._internal_memory_usage()) != 0) {
-    _this->_impl_.memory_usage_ = from._impl_.memory_usage_;
-  }
-  if (::absl::bit_cast<::uint64_t>(from._internal_network_latency()) != 0) {
-    _this->_impl_.network_latency_ = from._impl_.network_latency_;
-  }
-  if (from._internal_queue_size() != 0) {
-    _this->_impl_.queue_size_ = from._impl_.queue_size_;
-  }
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void MetricsUpdate::CopyFrom(const MetricsUpdate& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:mini2.MetricsUpdate)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-
-void MetricsUpdate::InternalSwap(MetricsUpdate* PROTOBUF_RESTRICT other) {
-  using std::swap;
-  auto* arena = GetArena();
-  ABSL_DCHECK_EQ(arena, other->GetArena());
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.server_id_, &other->_impl_.server_id_, arena);
-  ::google::protobuf::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.queue_size_)
-      + sizeof(MetricsUpdate::_impl_.queue_size_)
-      - PROTOBUF_FIELD_OFFSET(MetricsUpdate, _impl_.cpu_load_)>(
-          reinterpret_cast<char*>(&_impl_.cpu_load_),
-          reinterpret_cast<char*>(&other->_impl_.cpu_load_));
-}
-
-::google::protobuf::Metadata MetricsUpdate::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================

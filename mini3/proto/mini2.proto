@@ -62,79 +62,90 @@ message RiskAssessment {
     int32 total_fatalities = 4;
 }
 
-// Add this new message
+// Dataset information
 message DatasetInfo {
     int64 total_size = 1;
 }
 
-// Service for Python client → Server A communication
-service EntryPointService {
-    // Defines how clients stream data to Server A
-    rpc StreamCollisions(stream CollisionData) returns (Empty) {}
-    
-    // Add new method to set dataset size
-    rpc SetDatasetInfo(DatasetInfo) returns (Empty) {}
+// Server metrics for replication
+message ServerMetrics {
+    double cpu_utilization = 1;
+    double memory_usage = 2;
+    double avg_network_latency = 3;
+    int32 message_queue_length = 4;
+    int32 max_queue_length = 5;
+    double avg_message_age = 6;
+    double max_message_age = 7;
+    double max_acceptable_latency = 8;
+    int32 hop_distance = 9;
 }
 
-// Service for inter-server communication (A,B,C,D,E)
-service InterServerService {
-    // Forward data between servers
-    rpc ForwardData(CollisionBatch) returns (Empty) {}
-    
-    // Share analysis results
-    rpc ShareAnalysis(RiskAssessment) returns (Empty) {}
-    
-    // Add new method
-    rpc SetTotalDatasetSize(DatasetInfo) returns (Empty) {}
+// Work stealing request
+message StealRequest {
+    string requester_id = 1;
+    int32 requested_count = 2;
+    ServerMetrics requester_metrics = 3;
 }
 
-service ReplicationService {
-    // Keep existing RPCs from Mini 2
-    
-    // Add new RPCs for Mini 3
-    rpc StealWork (StealRequest) returns (StealResponse) {}
-    rpc UpdateMetrics (MetricsUpdate) returns (MetricsResponse) {}
-    rpc SyncReplicas (SyncRequest) returns (SyncResponse) {}
+// Work stealing response
+message StealResponse {
+    bool success = 1;
+    repeated CollisionData stolen_messages = 2;
+    string error_message = 3;
 }
-// Add this message type for StealResponse
-message Message {
-    string content = 1;
-    string id = 2;
-    int64 timestamp = 3;
+
+// Server discovery
+message ServerInfo {
+    string server_id = 1;
+    string address = 2;
+    int32 port = 3;
+    ServerMetrics metrics = 4;
 }
-// Add this message type for UpdateMetrics RPC
+
+// Server list
+message ServerList {
+    repeated ServerInfo servers = 1;
+}
+
+// Metrics update
+message MetricsUpdate {
+    string server_id = 1;
+    ServerMetrics metrics = 2;
+}
+
+// Metrics response
 message MetricsResponse {
     bool success = 1;
     string message = 2;
 }
 
-// New message types for Mini 3
-message StealRequest {
-    string source_server = 1;
-    int32 requested_items = 2;
-}
-
-message StealResponse {
-    repeated Message stolen_messages = 1;
-}
-
-message MetricsUpdate {
-    string server_id = 1;
-    double cpu_load = 2;
-    int32 queue_size = 3;
-    double memory_usage = 4;
-    double network_latency = 5;
-}
-
+// Sync request
 message SyncRequest {
     string server_id = 1;
 }
 
+// Sync response
 message SyncResponse {
     bool success = 1;
 }
 
 message Empty {}
+
+// Service for inter-server communication
+service InterServerService {
+    // Original Mini 2 RPCs
+    rpc ForwardData(CollisionBatch) returns (Empty) {}
+    rpc ShareAnalysis(RiskAssessment) returns (Empty) {}
+    rpc SetTotalDatasetSize(DatasetInfo) returns (Empty) {}
+    
+    // Mini 3 Replication RPCs
+    rpc StealWork(StealRequest) returns (StealResponse) {}
+    rpc UpdateMetrics(MetricsUpdate) returns (MetricsResponse) {}
+    rpc SyncReplicas(SyncRequest) returns (SyncResponse) {}
+    rpc RegisterServer(ServerInfo) returns (ServerList) {}
+    rpc UnregisterServer(ServerInfo) returns (ServerList) {}
+    rpc HealthCheck(ServerInfo) returns (ServerInfo) {}
+}
 
 
 
